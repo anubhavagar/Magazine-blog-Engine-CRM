@@ -1,0 +1,1 @@
+C:\Anubhav\projects\AapkiMagazine\AapkiMagazine\AapkiMagazine.Azure\bin\Debug\ServiceConfiguration.cscfg

@@ -1,0 +1,5 @@
+C:\Anubhav\projects\AapkiMagazine\AapkiMagazine\DataLayer\bin\Debug\DataLayer.dll
+C:\Anubhav\projects\AapkiMagazine\AapkiMagazine\DataLayer\bin\Debug\DataLayer.pdb
+C:\Anubhav\projects\AapkiMagazine\AapkiMagazine\DataLayer\obj\Debug\ResolveAssemblyReference.cache
+C:\Anubhav\projects\AapkiMagazine\AapkiMagazine\DataLayer\obj\Debug\DataLayer.dll
+C:\Anubhav\projects\AapkiMagazine\AapkiMagazine\DataLayer\obj\Debug\DataLayer.pdb

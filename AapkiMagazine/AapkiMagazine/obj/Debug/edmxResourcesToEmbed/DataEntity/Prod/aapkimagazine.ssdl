@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="maihuaam_databaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="maihuaam_databaseModelStoreContainer">
+    <EntitySet Name="ArticleArchived" EntityType="maihuaam_databaseModel.Store.ArticleArchived" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ArticleCategory" EntityType="maihuaam_databaseModel.Store.ArticleCategory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ArticleEntry" EntityType="maihuaam_databaseModel.Store.ArticleEntry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ArticlePublished" EntityType="maihuaam_databaseModel.Store.ArticlePublished" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Articles" EntityType="maihuaam_databaseModel.Store.Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BreakingNews" EntityType="maihuaam_databaseModel.Store.BreakingNews" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pictures" EntityType="maihuaam_databaseModel.Store.Pictures" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PortalUserProfiles" EntityType="maihuaam_databaseModel.Store.PortalUserProfiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tags" EntityType="maihuaam_databaseModel.Store.Tags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Videos" EntityType="maihuaam_databaseModel.Store.Videos" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ArticleArchived_ArticleCategory" Association="maihuaam_databaseModel.Store.FK_ArticleArchived_ArticleCategory">
+      <End Role="ArticleCategory" EntitySet="ArticleCategory" />
+      <End Role="ArticleArchived" EntitySet="ArticleArchived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleArchived_Articles" Association="maihuaam_databaseModel.Store.FK_ArticleArchived_Articles">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="ArticleArchived" EntitySet="ArticleArchived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleArchived_Pictures" Association="maihuaam_databaseModel.Store.FK_ArticleArchived_Pictures">
+      <End Role="Pictures" EntitySet="Pictures" />
+      <End Role="ArticleArchived" EntitySet="ArticleArchived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleArchived_PortalUserProfiles" Association="maihuaam_databaseModel.Store.FK_ArticleArchived_PortalUserProfiles">
+      <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+      <End Role="ArticleArchived" EntitySet="ArticleArchived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleArchived_PortalUserProfiles1" Association="maihuaam_databaseModel.Store.FK_ArticleArchived_PortalUserProfiles1">
+      <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+      <End Role="ArticleArchived" EntitySet="ArticleArchived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleArchived_Videos" Association="maihuaam_databaseModel.Store.FK_ArticleArchived_Videos">
+      <End Role="Videos" EntitySet="Videos" />
+      <End Role="ArticleArchived" EntitySet="ArticleArchived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_ArticleCategory" Association="maihuaam_databaseModel.Store.FK_ArticleEntry_ArticleCategory">
+      <End Role="ArticleCategory" EntitySet="ArticleCategory" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_Articles" Association="maihuaam_databaseModel.Store.FK_ArticleEntry_Articles">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_Pictures" Association="maihuaam_databaseModel.Store.FK_ArticleEntry_Pictures">
+      <End Role="Pictures" EntitySet="Pictures" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_PortalUserProfiles" Association="maihuaam_databaseModel.Store.FK_ArticleEntry_PortalUserProfiles">
+      <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_PortalUserProfiles1" Association="maihuaam_databaseModel.Store.FK_ArticleEntry_PortalUserProfiles1">
+      <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_Videos" Association="maihuaam_databaseModel.Store.FK_ArticleEntry_Videos">
+      <End Role="Videos" EntitySet="Videos" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticlePublished_ArticleCategory" Association="maihuaam_databaseModel.Store.FK_ArticlePublished_ArticleCategory">
+      <End Role="ArticleCategory" EntitySet="ArticleCategory" />
+      <End Role="ArticlePublished" EntitySet="ArticlePublished" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticlePublished_Articles" Association="maihuaam_databaseModel.Store.FK_ArticlePublished_Articles">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="ArticlePublished" EntitySet="ArticlePublished" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticlePublished_Pictures" Association="maihuaam_databaseModel.Store.FK_ArticlePublished_Pictures">
+      <End Role="Pictures" EntitySet="Pictures" />
+      <End Role="ArticlePublished" EntitySet="ArticlePublished" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticlePublished_PortalUserProfiles" Association="maihuaam_databaseModel.Store.FK_ArticlePublished_PortalUserProfiles">
+      <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+      <End Role="ArticlePublished" EntitySet="ArticlePublished" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticlePublished_PortalUserProfiles1" Association="maihuaam_databaseModel.Store.FK_ArticlePublished_PortalUserProfiles1">
+      <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+      <End Role="ArticlePublished" EntitySet="ArticlePublished" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticlePublished_Videos" Association="maihuaam_databaseModel.Store.FK_ArticlePublished_Videos">
+      <End Role="Videos" EntitySet="Videos" />
+      <End Role="ArticlePublished" EntitySet="ArticlePublished" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BreakingNews_ArticlePublished" Association="maihuaam_databaseModel.Store.FK_BreakingNews_ArticlePublished">
+      <End Role="ArticlePublished" EntitySet="ArticlePublished" />
+      <End Role="BreakingNews" EntitySet="BreakingNews" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ArticleArchived">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="category_id" Type="int" />
+    <Property Name="title_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="content_full" Type="nvarchar(max)" />
+    <Property Name="author" Type="nvarchar" MaxLength="50" />
+    <Property Name="active" Type="tinyint" />
+    <Property Name="company" Type="nvarchar" MaxLength="50" />
+    <Property Name="Archived" Type="tinyint" />
+    <Property Name="isbreakingnews" Type="tinyint" />
+    <Property Name="isfrontslider" Type="tinyint" />
+    <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="content_summary" Type="nvarchar(max)" />
+    <Property Name="title" Type="nvarchar" MaxLength="300" />
+    <Property Name="title_english" Type="varchar" MaxLength="300" />
+    <Property Name="title_seo" Type="varchar" MaxLength="300" />
+    <Property Name="tags" Type="varchar(max)" />
+    <Property Name="video_id" Type="int" />
+    <Property Name="picture_id" Type="int" />
+    <Property Name="approver_id" Type="uniqueidentifier" />
+    <Property Name="isRejected" Type="tinyint" />
+    <Property Name="remark" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ArticleCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="name_english" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ArticleEntry">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="category_id" Type="int" />
+    <Property Name="title_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="content_full" Type="nvarchar(max)" />
+    <Property Name="author" Type="nvarchar" MaxLength="50" />
+    <Property Name="active" Type="tinyint" />
+    <Property Name="company" Type="nvarchar" MaxLength="50" />
+    <Property Name="isbreakingnews" Type="tinyint" />
+    <Property Name="isfrontslider" Type="tinyint" />
+    <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="content_summary" Type="nvarchar(max)" />
+    <Property Name="title" Type="nvarchar" MaxLength="300" />
+    <Property Name="title_english" Type="varchar" MaxLength="300" />
+    <Property Name="title_seo" Type="varchar" MaxLength="300" />
+    <Property Name="tags" Type="varchar(max)" />
+    <Property Name="video_id" Type="int" />
+    <Property Name="picture_id" Type="int" />
+    <Property Name="approver_id" Type="uniqueidentifier" />
+    <Property Name="isRejected" Type="tinyint" />
+    <Property Name="remark" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ArticlePublished">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="category_id" Type="int" />
+    <Property Name="title_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="content_full" Type="nvarchar(max)" />
+    <Property Name="author" Type="nvarchar" MaxLength="50" />
+    <Property Name="active" Type="tinyint" />
+    <Property Name="company" Type="nvarchar" MaxLength="50" />
+    <Property Name="isbreakingnews" Type="tinyint" />
+    <Property Name="isfrontslider" Type="tinyint" />
+    <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="content_summary" Type="nvarchar(max)" />
+    <Property Name="title" Type="nvarchar" MaxLength="300" />
+    <Property Name="title_english" Type="varchar" MaxLength="300" />
+    <Property Name="title_seo" Type="varchar" MaxLength="300" />
+    <Property Name="tags" Type="varchar(max)" />
+    <Property Name="video_id" Type="int" />
+    <Property Name="picture_id" Type="int" />
+    <Property Name="approver_id" Type="uniqueidentifier" />
+    <Property Name="isRejected" Type="tinyint" />
+    <Property Name="remark" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Articles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="created_date" Type="datetime" Nullable="false" />
+    <Property Name="modified_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BreakingNews">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="article_id" Type="int" />
+    <Property Name="custom_text" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Pictures">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="picture_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="article_id" Type="int" />
+    <Property Name="size_kb" Type="float" />
+  </EntityType>
+  <EntityType Name="PortalUserProfiles">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="last_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Role" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="user_email" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="salt" Type="nvarchar" MaxLength="50" />
+    <Property Name="pwdchangedate" Type="datetime" />
+    <Property Name="createddate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Tags">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="articles" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Videos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="video_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="article_id" Type="int" />
+  </EntityType>
+  <Association Name="FK_ArticleArchived_ArticleCategory">
+    <End Role="ArticleCategory" Type="maihuaam_databaseModel.Store.ArticleCategory" Multiplicity="0..1" />
+    <End Role="ArticleArchived" Type="maihuaam_databaseModel.Store.ArticleArchived" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleArchived">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleArchived_Articles">
+    <End Role="Articles" Type="maihuaam_databaseModel.Store.Articles" Multiplicity="1" />
+    <End Role="ArticleArchived" Type="maihuaam_databaseModel.Store.ArticleArchived" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleArchived">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleArchived_Pictures">
+    <End Role="Pictures" Type="maihuaam_databaseModel.Store.Pictures" Multiplicity="0..1" />
+    <End Role="ArticleArchived" Type="maihuaam_databaseModel.Store.ArticleArchived" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pictures">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleArchived">
+        <PropertyRef Name="picture_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleArchived_PortalUserProfiles">
+    <End Role="PortalUserProfiles" Type="maihuaam_databaseModel.Store.PortalUserProfiles" Multiplicity="1" />
+    <End Role="ArticleArchived" Type="maihuaam_databaseModel.Store.ArticleArchived" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PortalUserProfiles">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="ArticleArchived">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleArchived_PortalUserProfiles1">
+    <End Role="PortalUserProfiles" Type="maihuaam_databaseModel.Store.PortalUserProfiles" Multiplicity="0..1" />
+    <End Role="ArticleArchived" Type="maihuaam_databaseModel.Store.ArticleArchived" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PortalUserProfiles">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="ArticleArchived">
+        <PropertyRef Name="approver_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleArchived_Videos">
+    <End Role="Videos" Type="maihuaam_databaseModel.Store.Videos" Multiplicity="0..1" />
+    <End Role="ArticleArchived" Type="maihuaam_databaseModel.Store.ArticleArchived" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Videos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleArchived">
+        <PropertyRef Name="video_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_ArticleCategory">
+    <End Role="ArticleCategory" Type="maihuaam_databaseModel.Store.ArticleCategory" Multiplicity="0..1" />
+    <End Role="ArticleEntry" Type="maihuaam_databaseModel.Store.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_Articles">
+    <End Role="Articles" Type="maihuaam_databaseModel.Store.Articles" Multiplicity="1" />
+    <End Role="ArticleEntry" Type="maihuaam_databaseModel.Store.ArticleEntry" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_Pictures">
+    <End Role="Pictures" Type="maihuaam_databaseModel.Store.Pictures" Multiplicity="0..1" />
+    <End Role="ArticleEntry" Type="maihuaam_databaseModel.Store.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pictures">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="picture_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_PortalUserProfiles">
+    <End Role="PortalUserProfiles" Type="maihuaam_databaseModel.Store.PortalUserProfiles" Multiplicity="1" />
+    <End Role="ArticleEntry" Type="maihuaam_databaseModel.Store.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PortalUserProfiles">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_PortalUserProfiles1">
+    <End Role="PortalUserProfiles" Type="maihuaam_databaseModel.Store.PortalUserProfiles" Multiplicity="0..1" />
+    <End Role="ArticleEntry" Type="maihuaam_databaseModel.Store.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PortalUserProfiles">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="approver_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_Videos">
+    <End Role="Videos" Type="maihuaam_databaseModel.Store.Videos" Multiplicity="0..1" />
+    <End Role="ArticleEntry" Type="maihuaam_databaseModel.Store.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Videos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="video_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticlePublished_ArticleCategory">
+    <End Role="ArticleCategory" Type="maihuaam_databaseModel.Store.ArticleCategory" Multiplicity="0..1" />
+    <End Role="ArticlePublished" Type="maihuaam_databaseModel.Store.ArticlePublished" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticlePublished">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticlePublished_Articles">
+    <End Role="Articles" Type="maihuaam_databaseModel.Store.Articles" Multiplicity="1" />
+    <End Role="ArticlePublished" Type="maihuaam_databaseModel.Store.ArticlePublished" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticlePublished">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticlePublished_Pictures">
+    <End Role="Pictures" Type="maihuaam_databaseModel.Store.Pictures" Multiplicity="0..1" />
+    <End Role="ArticlePublished" Type="maihuaam_databaseModel.Store.ArticlePublished" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pictures">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticlePublished">
+        <PropertyRef Name="picture_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticlePublished_PortalUserProfiles">
+    <End Role="PortalUserProfiles" Type="maihuaam_databaseModel.Store.PortalUserProfiles" Multiplicity="1" />
+    <End Role="ArticlePublished" Type="maihuaam_databaseModel.Store.ArticlePublished" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PortalUserProfiles">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="ArticlePublished">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticlePublished_PortalUserProfiles1">
+    <End Role="PortalUserProfiles" Type="maihuaam_databaseModel.Store.PortalUserProfiles" Multiplicity="0..1" />
+    <End Role="ArticlePublished" Type="maihuaam_databaseModel.Store.ArticlePublished" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PortalUserProfiles">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="ArticlePublished">
+        <PropertyRef Name="approver_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticlePublished_Videos">
+    <End Role="Videos" Type="maihuaam_databaseModel.Store.Videos" Multiplicity="0..1" />
+    <End Role="ArticlePublished" Type="maihuaam_databaseModel.Store.ArticlePublished" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Videos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticlePublished">
+        <PropertyRef Name="video_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BreakingNews_ArticlePublished">
+    <End Role="ArticlePublished" Type="maihuaam_databaseModel.Store.ArticlePublished" Multiplicity="0..1" />
+    <End Role="BreakingNews" Type="maihuaam_databaseModel.Store.BreakingNews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticlePublished">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BreakingNews">
+        <PropertyRef Name="article_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetLatestTenNews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetTopBreakingNews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+</Schema>

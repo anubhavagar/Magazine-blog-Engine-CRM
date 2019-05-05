@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{77C3A137-DA1A-4F13-BD4E-A7891BAE390C}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AapkiMagazine</RootNamespace>
+    <AssemblyName>AapkiMagazine</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions">
+      <HintPath>..\packages\DataAnnotationsExtensions.1.1.0.0\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions.ClientValidation">
+      <HintPath>..\packages\DataAnnotationsExtensions.MVC3.1.1.0.0\lib\NETFramework40\DataAnnotationsExtensions.ClientValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Mvc">
+      <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Recaptcha">
+      <HintPath>..\packages\recaptcha.1.0.5.0\lib\.NetFramework 4.0\Recaptcha.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.2.0.0\lib\NETFramework40\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
+    <Compile Include="Controllers\AccountController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\HomeController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\ManageController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\SectionController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="DataEntity\prod\aapkimagazine.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>aapkimagazine.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\AppDbContext.cs" />
+    <Compile Include="DataLayer\DataAccessBase.cs" />
+    <Compile Include="DataLayer\DataAccessLayer.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ElmahMVCErrorFilter.cs" />
+    <Compile Include="Helper\GzipFilterAttribute.cs" />
+    <Compile Include="Helper\Helper_Magazine.cs" />
+    <Compile Include="Helper\RequiresSSL.cs" />
+    <Compile Include="Helper\StringHtmlExtensions.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ArticleViewModel.cs" />
+    <Compile Include="Models\CategoryItem.cs" />
+    <Compile Include="Models\DashboardViewModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\PostsByCategoryViewModel.cs" />
+    <Compile Include="Models\PostViewModel.cs" />
+    <Compile Include="Models\TagViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\colorschemes\dark.css" />
+    <Content Include="Content\colorschemes\default.css" />
+    <Content Include="Content\colorschemes\light.css" />
+    <Content Include="Content\colorschemes\_master.css" />
+    <Content Include="Content\css\base.css" />
+    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\css\bootstrap-glyphicons.css" />
+    <Content Include="Content\css\bootstrap-tagsinput.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\components.css" />
+    <Content Include="Content\css\default_color.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\google_font.css" />
+    <Content Include="Content\css\jhtmlarea\jHtmlArea.ColorPickerMenu.css" />
+    <Content Include="Content\css\jhtmlarea\jHtmlArea.css" />
+    <Content Include="Content\css\jhtmlarea\jHtmlArea.Editor.css" />
+    <Content Include="Content\css\jhtmlarea\jHtmlArea.png" />
+    <Content Include="Content\css\jhtmlarea\jHtmlArea_Toolbar_Group_BG.png" />
+    <Content Include="Content\css\jhtmlarea\jHtmlArea_Toolbar_Group__Btn_Select_BG.png" />
+    <Content Include="Content\css\jquery.vegas.min.css" />
+    <Content Include="Content\css\libs.css" />
+    <Content Include="Content\css\magicsuggest-1.3.1-min.css" />
+    <Content Include="Content\css\manage.css" />
+    <Content Include="Content\css\prettyPhoto.css" />
+    <Content Include="Content\css\signin.css" />
+    <Content Include="Content\css\tablesorter\tablesorter_blue.css" />
+    <Content Include="Content\css\tagmanager.css" />
+    <Content Include="Content\css\ticker-style.css" />
+    <Content Include="Content\images\aapkikranti.png" />
+    <Content Include="Content\images\aapkikranti_new.png" />
+    <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\articles\3667600.jpg" />
+    <Content Include="Content\images\articles\3667601.jpg" />
+    <Content Include="Content\images\authenticate_bg.jpg" />
+    <Content Include="Content\images\authenticate_bg2.jpg" />
+    <Content Include="Content\images\controls.png" />
+    <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\layers\kidmondo_face_sad.gif" />
+    <Content Include="Content\images\mainhunaamadmi_new.png" />
+    <Content Include="Content\images\new_header.png" />
+    <Content Include="Content\images\search.png" />
+    <Content Include="Content\images\social\default\default_thumb.png" />
+    <Content Include="Content\images\social\default\loader.gif" />
+    <Content Include="Content\images\social\default\sprite.png" />
+    <Content Include="Content\images\social\default\sprite_next.png" />
+    <Content Include="Content\images\social\default\sprite_prev.png" />
+    <Content Include="Content\images\social\default\sprite_x.png" />
+    <Content Include="Content\images\social\default\sprite_y.png" />
+    <Content Include="Content\images\social\facebook.png" />
+    <Content Include="Content\images\social\facebook_color.png" />
+    <Content Include="Content\images\social\google.png" />
+    <Content Include="Content\images\social\google_color.png" />
+    <Content Include="Content\images\social\rss.png" />
+    <Content Include="Content\images\social\rss_color.png" />
+    <Content Include="Content\images\social\twitter.png" />
+    <Content Include="Content\images\social\twitter_color.png" />
+    <Content Include="Content\images\sprite.png" />
+    <Content Include="Content\images\tick.png" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\vendor\font-awesome\css\font-awesome-ie7.css" />
+    <Content Include="Content\vendor\font-awesome\css\font-awesome-ie7.min.css" />
+    <Content Include="Content\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\vendor\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Content\vendor\jquery-1.10.1.min.js" />
+    <Content Include="Content\vendor\jquery.unveil.min.js" />
+    <Content Include="Content\vendor\modernizr-2.6.2-respond-1.1.0.min.js" />
+    <Content Include="Content\vendor\prettyPhoto\css\prettyPhoto.css" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_rounded\btnNext.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_rounded\btnPrevious.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_rounded\contentPattern.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_rounded\default_thumbnail.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_rounded\loader.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_rounded\sprite.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_square\btnNext.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_square\btnPrevious.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_square\contentPattern.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_square\default_thumbnail.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_square\loader.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\dark_square\sprite.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\default\default_thumb.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\default\loader.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\default\sprite.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\default\sprite_next.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\default\sprite_prev.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\default\sprite_x.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\default\sprite_y.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\facebook\btnNext.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\facebook\btnPrevious.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\facebook\contentPatternBottom.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\facebook\contentPatternLeft.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\facebook\contentPatternRight.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\facebook\contentPatternTop.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\facebook\default_thumbnail.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\facebook\loader.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\facebook\sprite.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_rounded\btnNext.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_rounded\btnPrevious.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_rounded\default_thumbnail.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_rounded\loader.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_rounded\sprite.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_square\btnNext.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_square\btnPrevious.png" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_square\default_thumbnail.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_square\loader.gif" />
+    <Content Include="Content\vendor\prettyPhoto\images\prettyPhoto\light_square\sprite.png" />
+    <Content Include="Content\vendor\prettyPhoto\jquery.prettyPhoto.js" />
+    <Content Include="Content\vendor\reset.css" />
+    <Content Include="Scripts\js\Article_Options.js" />
+    <Content Include="Scripts\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\js\bootstrap-tagsinput.js" />
+    <Content Include="Scripts\js\bootstrap-tagsinput.min.js" />
+    <Content Include="Scripts\js\bootstrap.min.js" />
+    <Content Include="Scripts\js\bootstrap3.typeahead.js" />
+    <Content Include="Scripts\js\createarticle.js" />
+    <Content Include="Scripts\js\editarticle.js" />
+    <Content Include="Scripts\js\jHtmlArea-0.7.5.min.js" />
+    <Content Include="Scripts\js\jHtmlArea.ColorPickerMenu-0.7.0.min.js" />
+    <Content Include="Scripts\js\jquery-1.10.1.min.js" />
+    <Content Include="Scripts\js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Scripts\js\jquery.cookie.js" />
+    <Content Include="Scripts\js\jquery.parallax.min.js" />
+    <Content Include="Scripts\js\jquery.prettyPhoto.js" />
+    <Content Include="Scripts\js\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\js\jquery.ticker.js" />
+    <Content Include="Scripts\js\jquery.ticker.min.js" />
+    <Content Include="Scripts\js\jquery.unveil.min.js" />
+    <Content Include="Scripts\js\jquery.vegas.min.js" />
+    <Content Include="Scripts\js\magicsuggest-1.3.1-min.js" />
+    <Content Include="Scripts\js\main.js" />
+    <Content Include="Scripts\js\manage.js" />
+    <Content Include="Scripts\js\marquee.js" />
+    <Content Include="Scripts\js\modernizr-2.6.2-respond-1.1.0.min.js" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\js\placeholder.js" />
+    <Content Include="Scripts\js\signin.js" />
+    <Content Include="Scripts\js\tablesorter.js" />
+    <Content Include="Scripts\js\tablesorter_widget.js" />
+    <Content Include="Scripts\js\tagmanager.js" />
+    <Content Include="Scripts\js\text-sizer.js" />
+    <Content Include="Scripts\js\typeahead.js" />
+    <Content Include="Scripts\js\typeahead.min.js" />
+    <Content Include="Scripts\js\vticker.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\images\prettyPhoto\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\colorschemes\dark.less" />
+    <None Include="Content\colorschemes\default.less" />
+    <None Include="Content\colorschemes\light.less" />
+    <None Include="Content\colorschemes\_master.less" />
+    <None Include="Content\css\base.less" />
+    <None Include="Content\css\bootstrap-tagsinput.less" />
+    <None Include="Content\css\components.less" />
+    <None Include="Content\css\css" />
+    <None Include="Content\css\libs.less" />
+    <None Include="Content\json\data.json" />
+    <None Include="Content\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Content\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Content\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Content\vendor\font-awesome\font\fontawesome-webfont.eot" />
+    <None Include="Content\vendor\font-awesome\font\fontawesome-webfont.ttf" />
+    <None Include="Content\vendor\font-awesome\font\fontawesome-webfont.woff" />
+    <None Include="Content\vendor\font-awesome\font\FontAwesome.otf" />
+    <EntityDeploy Include="DataEntity\prod\aapkimagazine.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>aapkimagazine.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Properties\PublishProfiles\aapkimagazine.pubxml" />
+    <Content Include="Views\Account\Authenticate.cshtml" />
+    <Content Include="Views\Manage\CreateArticle.cshtml" />
+    <Content Include="Views\Shared\_Layout_Manage.cshtml" />
+    <Content Include="Views\Manage\ArticleOption.cshtml" />
+    <Content Include="Views\Shared\_Layout_Account.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Post\Index.cshtml" />
+    <Content Include="Views\Section\Index.cshtml" />
+    <Content Include="Views\Tag\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\maihuaamaadmi.pubxml" />
+    <Content Include="Views\Shared\_PageNotFound.cshtml" />
+    <Content Include="Views\Manage\EditPublished.cshtml" />
+    <Content Include="Views\Manage\ArticlePublishedOption.cshtml" />
+    <Content Include="Views\Manage\PreviewArticleEntry.cshtml" />
+    <Content Include="Views\Manage\PreviewArticlePublished.cshtml" />
+    <Content Include="Views\Manage\PreviewArticleArchived.cshtml" />
+    <Content Include="Views\Shared\_PostPreview.cshtml" />
+    <Content Include="Views\Shared\_BreakingNews.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1137</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1190/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

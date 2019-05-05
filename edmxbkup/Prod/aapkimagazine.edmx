@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="rosteci_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="rosteci_ModelStoreContainer">
+          <EntitySet Name="ArticleCategory" EntityType="rosteci_Model.Store.ArticleCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ArticleEntry" EntityType="rosteci_Model.Store.ArticleEntry" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Articles" EntityType="rosteci_Model.Store.Articles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BreakingNews" EntityType="rosteci_Model.Store.BreakingNews" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pictures" EntityType="rosteci_Model.Store.Pictures" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PortalUserProfiles" EntityType="rosteci_Model.Store.PortalUserProfiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tags" EntityType="rosteci_Model.Store.Tags" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Videos" EntityType="rosteci_Model.Store.Videos" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ArticleEntry_ArticleCategory" Association="rosteci_Model.Store.FK_ArticleEntry_ArticleCategory">
+            <End Role="ArticleCategory" EntitySet="ArticleCategory" />
+            <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArticleEntry_Articles" Association="rosteci_Model.Store.FK_ArticleEntry_Articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArticleEntry_PortalUserProfiles" Association="rosteci_Model.Store.FK_ArticleEntry_PortalUserProfiles">
+            <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+            <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ArticleCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="name_english" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ArticleEntry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="category_id" Type="int" />
+          <Property Name="title_url" Type="nvarchar" MaxLength="100" />
+          <Property Name="content_full" Type="nvarchar(max)" />
+          <Property Name="author" Type="nvarchar" MaxLength="50" />
+          <Property Name="active" Type="tinyint" />
+          <Property Name="picture_url" Type="nvarchar" MaxLength="100" />
+          <Property Name="video_url" Type="nvarchar" MaxLength="100" />
+          <Property Name="tags" Type="nvarchar" MaxLength="100" />
+          <Property Name="company" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_emailid" Type="varchar" MaxLength="50" />
+          <Property Name="published" Type="tinyint" />
+          <Property Name="isbreakingnews" Type="tinyint" />
+          <Property Name="isfrontslider" Type="tinyint" />
+          <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="content_summary" Type="nvarchar(max)" />
+          <Property Name="title" Type="nvarchar" MaxLength="300" />
+          <Property Name="title_english" Type="varchar" MaxLength="300" />
+          <Property Name="title_seo" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="created_date" Type="datetime" Nullable="false" />
+          <Property Name="modified_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BreakingNews">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="nvarchar" MaxLength="100" />
+          <Property Name="article_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="picture_url" Type="nvarchar" MaxLength="100" />
+          <Property Name="article_id" Type="int" />
+        </EntityType>
+        <EntityType Name="PortalUserProfiles">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="last_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Role" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="user_email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="salt" Type="nvarchar" MaxLength="50" />
+          <Property Name="pwdchangedate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="articles" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="video_url" Type="nvarchar" MaxLength="100" />
+          <Property Name="article_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_ArticleEntry_ArticleCategory">
+          <End Role="ArticleCategory" Type="rosteci_Model.Store.ArticleCategory" Multiplicity="0..1" />
+          <End Role="ArticleEntry" Type="rosteci_Model.Store.ArticleEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ArticleEntry">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArticleEntry_Articles">
+          <End Role="Articles" Type="rosteci_Model.Store.Articles" Multiplicity="1" />
+          <End Role="ArticleEntry" Type="rosteci_Model.Store.ArticleEntry" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ArticleEntry">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArticleEntry_PortalUserProfiles">
+          <End Role="PortalUserProfiles" Type="rosteci_Model.Store.PortalUserProfiles" Multiplicity="1" />
+          <End Role="ArticleEntry" Type="rosteci_Model.Store.ArticleEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PortalUserProfiles">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="ArticleEntry">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetFrontPageDataByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="mukeshgarg" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="rosteci_Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="rosteci_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArticleCategories" EntityType="rosteci_Model.ArticleCategory" />
+          <EntitySet Name="ArticleEntries" EntityType="rosteci_Model.ArticleEntry" />
+          <EntitySet Name="Articles" EntityType="rosteci_Model.Article" />
+          <EntitySet Name="BreakingNews" EntityType="rosteci_Model.BreakingNew" />
+          <EntitySet Name="Pictures" EntityType="rosteci_Model.Picture" />
+          <EntitySet Name="PortalUserProfiles" EntityType="rosteci_Model.PortalUserProfile" />
+          <EntitySet Name="Tags" EntityType="rosteci_Model.Tag" />
+          <EntitySet Name="Videos" EntityType="rosteci_Model.Video" />
+          <AssociationSet Name="FK_ArticleEntry_ArticleCategory" Association="rosteci_Model.FK_ArticleEntry_ArticleCategory">
+            <End Role="ArticleCategory" EntitySet="ArticleCategories" />
+            <End Role="ArticleEntry" EntitySet="ArticleEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArticleEntry_Articles" Association="rosteci_Model.FK_ArticleEntry_Articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="ArticleEntry" EntitySet="ArticleEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArticleEntry_PortalUserProfiles" Association="rosteci_Model.FK_ArticleEntry_PortalUserProfiles">
+            <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+            <End Role="ArticleEntry" EntitySet="ArticleEntries" />
+          </AssociationSet>
+          <FunctionImport Name="GetHomePageDataByCategory" ReturnType="Collection(rosteci_Model.HomePageDataByCategory)" />
+        </EntityContainer>
+        <EntityType Name="ArticleCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ArticleEntries" Relationship="rosteci_Model.FK_ArticleEntry_ArticleCategory" FromRole="ArticleCategory" ToRole="ArticleEntry" />
+          <Property Type="String" Name="name_english" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ArticleEntry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="category_id" Type="Int32" />
+          <Property Name="title_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="content_full" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="author" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="active" Type="Byte" />
+          <Property Name="picture_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="video_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="tags" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="company" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="user_emailid" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="published" Type="Byte" />
+          <Property Name="title_english" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="isbreakingnews" Type="Byte" />
+          <Property Name="isfrontslider" Type="Byte" />
+          <Property Name="user_id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ArticleCategory" Relationship="rosteci_Model.FK_ArticleEntry_ArticleCategory" FromRole="ArticleEntry" ToRole="ArticleCategory" />
+          <NavigationProperty Name="Article" Relationship="rosteci_Model.FK_ArticleEntry_Articles" FromRole="ArticleEntry" ToRole="Articles" />
+          <NavigationProperty Name="PortalUserProfile" Relationship="rosteci_Model.FK_ArticleEntry_PortalUserProfiles" FromRole="ArticleEntry" ToRole="PortalUserProfiles" />
+          <Property Type="String" Name="content_summary" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="title_seo" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created_date" Type="DateTime" Nullable="false" />
+          <Property Name="modified_date" Type="DateTime" />
+          <NavigationProperty Name="ArticleEntry" Relationship="rosteci_Model.FK_ArticleEntry_Articles" FromRole="Articles" ToRole="ArticleEntry" />
+        </EntityType>
+        <EntityType Name="BreakingNew">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="article_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="picture_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="article_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PortalUserProfile">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="Guid" Nullable="false" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="user_email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="salt" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="pwdchangedate" Type="DateTime" />
+          <NavigationProperty Name="ArticleEntries" Relationship="rosteci_Model.FK_ArticleEntry_PortalUserProfiles" FromRole="PortalUserProfiles" ToRole="ArticleEntry" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="articles" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="video_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="article_id" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_ArticleEntry_ArticleCategory">
+          <End Role="ArticleCategory" Type="rosteci_Model.ArticleCategory" Multiplicity="0..1" />
+          <End Role="ArticleEntry" Type="rosteci_Model.ArticleEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ArticleEntry">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArticleEntry_Articles">
+          <End Role="Articles" Type="rosteci_Model.Article" Multiplicity="1" />
+          <End Role="ArticleEntry" Type="rosteci_Model.ArticleEntry" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ArticleEntry">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArticleEntry_PortalUserProfiles">
+          <End Role="PortalUserProfiles" Type="rosteci_Model.PortalUserProfile" Multiplicity="1" />
+          <End Role="ArticleEntry" Type="rosteci_Model.ArticleEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PortalUserProfiles">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="ArticleEntry">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="HomePageDataByCategory">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="modified_date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="created_date" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="category_id" Nullable="true" />
+          <Property Type="String" Name="author" Nullable="true" MaxLength="50" />
+          <Property Type="Byte" Name="active" Nullable="true" />
+          <Property Type="String" Name="picture_url" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="video_url" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="tags" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="company" Nullable="true" MaxLength="50" />
+          <Property Type="Byte" Name="published" Nullable="true" />
+          <Property Type="Byte" Name="isbreakingnews" Nullable="true" />
+          <Property Type="Byte" Name="isfrontslider" Nullable="true" />
+          <Property Type="String" Name="content_summary" Nullable="true" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="title_seo" Nullable="true" MaxLength="300" />
+          <Property Type="Int64" Name="RowNbr" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="rosteci_ModelStoreContainer" CdmEntityContainer="rosteci_Entities">
+          <EntitySetMapping Name="ArticleCategories"><EntityTypeMapping TypeName="rosteci_Model.ArticleCategory"><MappingFragment StoreEntitySet="ArticleCategory">
+            <ScalarProperty Name="name_english" ColumnName="name_english" />
+                <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ArticleEntries"><EntityTypeMapping TypeName="rosteci_Model.ArticleEntry"><MappingFragment StoreEntitySet="ArticleEntry">
+            <ScalarProperty Name="title_seo" ColumnName="title_seo" />
+                <ScalarProperty Name="content_summary" ColumnName="content_summary" />
+                <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="title" ColumnName="title" />
+            <ScalarProperty Name="category_id" ColumnName="category_id" />
+            <ScalarProperty Name="title_url" ColumnName="title_url" />
+            <ScalarProperty Name="content_full" ColumnName="content_full" />
+            <ScalarProperty Name="author" ColumnName="author" />
+            <ScalarProperty Name="active" ColumnName="active" />
+            <ScalarProperty Name="picture_url" ColumnName="picture_url" />
+            <ScalarProperty Name="video_url" ColumnName="video_url" />
+            <ScalarProperty Name="tags" ColumnName="tags" />
+            <ScalarProperty Name="company" ColumnName="company" />
+            <ScalarProperty Name="user_emailid" ColumnName="user_emailid" />
+            <ScalarProperty Name="published" ColumnName="published" />
+            <ScalarProperty Name="title_english" ColumnName="title_english" />
+            <ScalarProperty Name="isbreakingnews" ColumnName="isbreakingnews" />
+            <ScalarProperty Name="isfrontslider" ColumnName="isfrontslider" />
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Articles"><EntityTypeMapping TypeName="rosteci_Model.Article"><MappingFragment StoreEntitySet="Articles">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="created_date" ColumnName="created_date" />
+            <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="BreakingNews"><EntityTypeMapping TypeName="rosteci_Model.BreakingNew"><MappingFragment StoreEntitySet="BreakingNews">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="Text" ColumnName="Text" />
+            <ScalarProperty Name="article_id" ColumnName="article_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Pictures"><EntityTypeMapping TypeName="rosteci_Model.Picture"><MappingFragment StoreEntitySet="Pictures">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="picture_url" ColumnName="picture_url" />
+            <ScalarProperty Name="article_id" ColumnName="article_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PortalUserProfiles"><EntityTypeMapping TypeName="rosteci_Model.PortalUserProfile"><MappingFragment StoreEntitySet="PortalUserProfiles">
+            <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+            <ScalarProperty Name="first_name" ColumnName="first_name" />
+            <ScalarProperty Name="last_name" ColumnName="last_name" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="Role" ColumnName="Role" />
+            <ScalarProperty Name="user_email" ColumnName="user_email" />
+            <ScalarProperty Name="salt" ColumnName="salt" />
+            <ScalarProperty Name="pwdchangedate" ColumnName="pwdchangedate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Tags"><EntityTypeMapping TypeName="rosteci_Model.Tag"><MappingFragment StoreEntitySet="Tags">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="articles" ColumnName="articles" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Videos"><EntityTypeMapping TypeName="rosteci_Model.Video"><MappingFragment StoreEntitySet="Videos">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="video_url" ColumnName="video_url" />
+            <ScalarProperty Name="article_id" ColumnName="article_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetHomePageDataByCategory" FunctionName="rosteci_Model.Store.GetFrontPageDataByCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rosteci_Model.HomePageDataByCategory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="picture_url" ColumnName="picture_url" />
+                <ScalarProperty Name="video_url" ColumnName="video_url" />
+                <ScalarProperty Name="tags" ColumnName="tags" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="published" ColumnName="published" />
+                <ScalarProperty Name="isbreakingnews" ColumnName="isbreakingnews" />
+                <ScalarProperty Name="isfrontslider" ColumnName="isfrontslider" />
+                <ScalarProperty Name="content_summary" ColumnName="content_summary" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="title_seo" ColumnName="title_seo" />
+                <ScalarProperty Name="RowNbr" ColumnName="RowNbr" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="aapkimagazine">
+        <EntityTypeShape EntityType="rosteci_Model.ArticleCategory" Width="1.5" PointX="0.75" PointY="3.625" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="rosteci_Model.ArticleEntry" Width="1.5" PointX="3" PointY="2" Height="4.8648079427083326" IsExpanded="true" />
+        <EntityTypeShape EntityType="rosteci_Model.Article" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416665" IsExpanded="true" />
+        <EntityTypeShape EntityType="rosteci_Model.BreakingNew" Width="1.5" PointX="5.75" PointY="1.625" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="rosteci_Model.Picture" Width="1.5" PointX="5.75" PointY="4.625" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="rosteci_Model.PortalUserProfile" Width="1.5" PointX="0.75" PointY="6.25" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="rosteci_Model.Tag" Width="1.5" PointX="2.75" PointY="7.625" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="rosteci_Model.Video" Width="1.5" PointX="4.75" PointY="7.625" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="rosteci_Model.FK_ArticleEntry_ArticleCategory" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.422841796875" />
+          <ConnectorPoint PointX="3" PointY="4.422841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="rosteci_Model.FK_ArticleEntry_Articles" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.2689925130208333" />
+          <ConnectorPoint PointX="3" PointY="2.2689925130208333" />
+        </AssociationConnector>
+        <AssociationConnector Association="rosteci_Model.FK_ArticleEntry_PortalUserProfiles" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.5574039713541659" />
+          <ConnectorPoint PointX="3" PointY="6.5574039713541659" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,45 @@
+﻿
+.textcontent{  
+    width:100%;
+    min-height:600px;
+}
+
+body { background-color:White;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.txt-block {
+  display: block;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.label
+{
+     font-size: 100%;
+    }
+    
+    .error
+    {
+         border-color:Red;
+        }
+    .success{  border-color:Green; }
+    
+    
+   .validcheckmark {background:url(../images/tick.png) no-repeat 0 0;}

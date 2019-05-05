@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="rosteci_Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="aapkikra_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ArticleCategories" EntityType="rosteci_Model.ArticleCategory" />
+    <EntitySet Name="ArticleEntries" EntityType="rosteci_Model.ArticleEntry" />
+    <EntitySet Name="Articles" EntityType="rosteci_Model.Article" />
+    <EntitySet Name="BreakingNews" EntityType="rosteci_Model.BreakingNew" />
+    <EntitySet Name="Pictures" EntityType="rosteci_Model.Picture" />
+    <EntitySet Name="PortalUserProfiles" EntityType="rosteci_Model.PortalUserProfile" />
+    <EntitySet Name="Products_Human" EntityType="rosteci_Model.Products_Human" />
+    <EntitySet Name="Products_Human_BK" EntityType="rosteci_Model.Products_Human_BK" />
+    <EntitySet Name="Products_Vetenary" EntityType="rosteci_Model.Products_Vetenary" />
+    <EntitySet Name="Tags" EntityType="rosteci_Model.Tag" />
+    <EntitySet Name="UserProfiles" EntityType="rosteci_Model.UserProfile" />
+    <EntitySet Name="Videos" EntityType="rosteci_Model.Video" />
+    <AssociationSet Name="FK_ArticleEntry_ArticleCategory" Association="rosteci_Model.FK_ArticleEntry_ArticleCategory">
+      <End Role="ArticleCategory" EntitySet="ArticleCategories" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_Articles" Association="rosteci_Model.FK_ArticleEntry_Articles">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_PortalUserProfiles" Association="rosteci_Model.FK_ArticleEntry_PortalUserProfiles">
+      <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntries" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ArticleCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="name_english" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ArticleEntries" Relationship="rosteci_Model.FK_ArticleEntry_ArticleCategory" FromRole="ArticleCategory" ToRole="ArticleEntry" />
+  </EntityType>
+  <EntityType Name="ArticleEntry">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="title_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="content_full" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="author" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="active" Type="Byte" />
+    <Property Name="picture_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="video_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="tags" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="company" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="user_emailid" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="published" Type="Byte" />
+    <Property Name="isbreakingnews" Type="Byte" />
+    <Property Name="isfrontslider" Type="Byte" />
+    <Property Name="user_id" Type="Guid" Nullable="false" />
+    <Property Name="content_summary" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="title" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="title_english" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="title_seo" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ArticleCategory" Relationship="rosteci_Model.FK_ArticleEntry_ArticleCategory" FromRole="ArticleEntry" ToRole="ArticleCategory" />
+    <NavigationProperty Name="Article" Relationship="rosteci_Model.FK_ArticleEntry_Articles" FromRole="ArticleEntry" ToRole="Articles" />
+    <NavigationProperty Name="PortalUserProfile" Relationship="rosteci_Model.FK_ArticleEntry_PortalUserProfiles" FromRole="ArticleEntry" ToRole="PortalUserProfiles" />
+  </EntityType>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="created_date" Type="DateTime" Nullable="false" />
+    <Property Name="modified_date" Type="DateTime" />
+    <NavigationProperty Name="ArticleEntry" Relationship="rosteci_Model.FK_ArticleEntry_Articles" FromRole="Articles" ToRole="ArticleEntry" />
+  </EntityType>
+  <EntityType Name="BreakingNew">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="article_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Picture">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="picture_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="article_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="PortalUserProfile">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="Guid" Nullable="false" />
+    <Property Name="first_name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="last_name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="user_email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="salt" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="pwdchangedate" Type="DateTime" />
+    <NavigationProperty Name="ArticleEntries" Relationship="rosteci_Model.FK_ArticleEntry_PortalUserProfiles" FromRole="PortalUserProfiles" ToRole="ArticleEntry" />
+  </EntityType>
+  <EntityType Name="Products_Human">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="composition" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="packing" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="producttype" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="medicinetype" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="imagepath" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Products_Human_BK">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="composition" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="packing" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="producttype" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="medicinetype" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="imagepath" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Products_Vetenary">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="composition" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="about" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="imagepath" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="articles" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+    <Property Name="UserRole" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="salt" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="video_url" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="article_id" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_ArticleEntry_ArticleCategory">
+    <End Role="ArticleCategory" Type="rosteci_Model.ArticleCategory" Multiplicity="0..1" />
+    <End Role="ArticleEntry" Type="rosteci_Model.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_Articles">
+    <End Role="Articles" Type="rosteci_Model.Article" Multiplicity="1" />
+    <End Role="ArticleEntry" Type="rosteci_Model.ArticleEntry" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_PortalUserProfiles">
+    <End Role="PortalUserProfiles" Type="rosteci_Model.PortalUserProfile" Multiplicity="1" />
+    <End Role="ArticleEntry" Type="rosteci_Model.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PortalUserProfiles">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

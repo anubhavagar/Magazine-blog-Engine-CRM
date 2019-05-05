@@ -1,0 +1,669 @@
+﻿@model AapkiMagazine.Models.HomeViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "मैं हूँ आम आदमी | Main Hun Aam Aadmi";
+    ViewBag.Keywords = "Main, Hun, Aam, Aadmi, Home, News, Aam Aadmi Party  ";
+    ViewBag.Description = "Home - Main Hun Aam Aadmi  ";
+}
+<div id="content" class="content section row">
+    <div class="col-md-9 col-lg-9">
+        <div class="row">
+            <div class="bg-base col-md-8 col-lg-8">
+              @if (Model.CorouselData != null)
+              {
+                <div id="latestNewsCarousel" class="section carousel carousel slide">
+                    <h2 class="section-title ribbon ribbon-highlight">
+                        <span>आज की खबर</span></h2>
+                    <div class="carousel-inner">
+                      
+                            @for (int i = 0; i < Model.CorouselData.Count; ++i)
+                            {
+                                if (i == 0)
+                                {                                 
+                            <div class="item active">
+                                <div class="entries">
+                                    <article class="entry style-large type-post">
+                                @if (!string.IsNullOrEmpty(Model.CorouselData[i].Image_path))
+                                {
+                                
+                                <figure class="entry-thumbnail hidden-xs">
+										<a href="#">
+											<!-- to disable lazy loading, remove data-src and data-src-retina -->
+											<img src="@Model.CorouselData[i].Image_path" data-src="" data-src-retina="" width="600" height="400" alt="" />
+
+											<!--fallback for no javascript browsers-->
+											<noscript>
+												&lt;img src="@Model.CorouselData[i].Image_path" alt=""&gt;
+											</noscript>
+										</a>
+									</figure>
+                                
+                                }
+									
+									<header class="entry-header">
+										<h3 class="entry-title">										
+                                        @Html.ActionLink(Model.CorouselData[i].Title, "Index", "Post", new { articleId = Model.CorouselData[i].ID, articleTitle = Model.CorouselData[i].Title_SEO }, new { title = Model.CorouselData[i].Title, rel = "bookmark" })                                  
+									</h3>
+										<div class="entry-meta">
+											@if (Model.CorouselData[i].Author != null)
+           { 
+                                         <span class="author">@Model.CorouselData[i].Author</span>                                     
+           }
+										
+                                        @if (Model.CorouselData[i].Created_Date != null)
+                                        { 
+                                 <span class="entry-date"><time datetime="@Model.CorouselData[i].Created_Date">@Model.CorouselData[i].Created_Date.ToString("dd MMM yyyy")</time></span>
+                                 
+                                        }
+										 @if (Model.CorouselData[i].Company != null)
+           {
+               <span class="category"> - 
+                            @Model.CorouselData[i].Company</span> }
+										</div>
+									</header>
+									<p>
+                                    							 @if (Model.CorouselData[i].Content_summary != null)
+                                            {
+                                @Html.Raw(Model.CorouselData[i].Content_summary)
+                           
+                                            }	
+                                    
+                                    
+                                    </p><div class="">
+										 @Html.ActionLink("और पढें..", "Index", "Post", new { articleId = Model.CorouselData[i].ID, articleTitle = Model.CorouselData[i].Title_SEO }, new { title = Model.CorouselData[i].Title, Class = "btn btn-default btn-xs" })                                  
+									</div>
+								</article>
+                                </div>
+                                <!--/.row.entries-->
+                            </div>
+                                }
+                                else
+                                {
+                            <div class="item">
+                                <div class="entries">
+                                    <article class="entry style-large type-post">
+                                @if (!string.IsNullOrEmpty(Model.CorouselData[i].Image_path))
+                                {
+                                
+                                <figure class="entry-thumbnail hidden-xs">
+										<a href="#">
+											<!-- to disable lazy loading, remove data-src and data-src-retina -->
+											<img src="@Model.CorouselData[i].Image_path" data-src="" data-src-retina="" width="600" height="400" alt="" />
+
+											<!--fallback for no javascript browsers-->
+											<noscript>
+												&lt;img src="@Model.CorouselData[i].Image_path" alt=""&gt;
+											</noscript>
+										</a>
+									</figure>
+                                
+                                }
+									
+									<header class="entry-header">
+										<h3 class="entry-title">										
+                                        @Html.ActionLink(Model.CorouselData[i].Title, "Index", "Post", new { articleId = Model.CorouselData[i].ID, articleTitle = Model.CorouselData[i].Title_SEO }, new { title = Model.CorouselData[i].Title, rel = "bookmark" })                                  
+									</h3>
+										<div class="entry-meta">
+											@if (Model.CorouselData[i].Author != null)
+           { 
+                                         <span class="author">@Model.CorouselData[i].Author</span>                                     
+           }
+										
+                                        @if (Model.CorouselData[i].Created_Date != null)
+                                        { 
+                                 <span class="entry-date"><time datetime="@Model.CorouselData[i].Created_Date">@Model.CorouselData[i].Created_Date.ToString("dd MMM yyyy")</time></span>
+                                 
+                                        }
+										 @if (Model.CorouselData[i].Company != null)
+           {
+               <span class="category"> -
+                            @Model.CorouselData[i].Company</span> }
+										</div>
+									</header>
+									<p>
+                                    							 @if (Model.CorouselData[i].Content_summary != null)
+                                            {
+                                @Html.Raw(Model.CorouselData[i].Content_summary)
+                           
+                                            }	
+                                    
+                                    
+                                    </p><div class="">
+										 @Html.ActionLink("और पढें..", "Index", "Post", new { articleId = Model.CorouselData[i].ID, articleTitle = Model.CorouselData[i].Title_SEO }, new { title = Model.CorouselData[i].Title, Class = "btn btn-default btn-xs" })                                  
+									</div>
+								</article>
+                                </div>
+                                <!--/.row.entries-->
+                            </div>
+                                }
+                            }
+                       
+                        <!--/.item-->
+                    </div>
+                    <!--/.carousel-inner-->
+                    <a class="left carousel-control" href="#latestNewsCarousel" data-slide="prev"><span
+                        class="icon icon-angle-left"></span></a><a class="right carousel-control" href="#latestNewsCarousel"
+                            data-slide="next"><span class="icon icon-angle-right"></span></a>
+                </div>
+              }
+            </div>
+            <div class="col-md-4 col-lg-4 md-pull-right">
+                @if (Model.TopNews != null)
+                {
+                    if (Model.TopNews.Count > 0)
+                    {
+                    <aside class="widget">
+
+								<h3 class="widget-title ribbon"><span>ताज़ा खबर</span></h3>
+
+								<ul class="entries">
+                                 @foreach (var newsitem in Model.TopNews)
+                                 {                                   
+                                     
+									<li class="entry style-recent-list type-post">
+																			
+                                        @Html.ActionLink(newsitem.Title, "Index", "Post", new { articleId = newsitem.Article_id, articleTitle = newsitem.Title_SEO }, new { title = newsitem.Title, rel = "bookmark", Class = "entry-title" })                                  										
+                                        <div class="entry-meta">
+                                         @{var dt = newsitem.ModifiedDate != null ? newsitem.ModifiedDate.Value.ToString("dd MMM yyyy") : "";}
+                                 <span class="entry-date"><time datetime="@newsitem.ModifiedDate">@dt</time></span>
+                                 </div>
+									</li>								
+                                 }
+								</ul>
+
+							</aside>
+                    <!--/.widget-->
+
+                     
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="sidebar col-md-3 col-lg-3">
+        <div class="collapsible-widgets">
+            <aside class="widget">
+						<h2 class="widget-title ribbon ribbon-focus"><span>देश</span></h2>
+                        <div class="entries row">
+                          @if (Model.HomePageCat3 != null)
+                          {
+                              foreach (var article in Model.HomePageCat3)
+                              { 
+                              <article class="type-post style-media-list style-review-list media col-sm-6 col-md-12">
+
+								@*<div class="style-review-score">
+									80
+								</div>	*@						
+								@if (!string.IsNullOrEmpty(article.Image_path))
+                               {
+                                 
+                                
+                                                <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                <img src="@article.Image_path" data-src="@article.Image_path" data-src-retina="@article.Image_path"
+                                                        width="80" height="80" alt="@article.Title" class="media-object pull-left"/>
+                                                <!--fallback for no javascript browsers-->
+                                                <noscript>
+                                                    <img src="@article.Image_path" alt="@article.Title" width="80" height="80">
+                                                </noscript>
+                                          
+								
+								<noscript>
+									&lt;img src="@article.Image_path" alt=""&gt;
+								</noscript>
+                               }
+                                 
+
+								<div class="media-body">
+									<h3 class="entry-title">
+										@Html.ActionLink(article.Title, "Index", "Post", new { articleId = article.ID, articleTitle = article.Title_SEO }, new { title = article.Title, rel = "bookmark" })                                  										
+									</h3>
+									<div class="entry-meta">
+                                         @{var dt = article.Modified_Date != null ? article.Modified_Date.Value.ToString("dd MMM yyyy") : "";}
+                                 <span class="entry-date"><time datetime ="@article.Modified_Date">@dt</time></span>
+                                 </div>
+								</div>
+
+							</article>
+                              
+                              }
+                          }
+							
+                          
+                               
+                            </div>
+                            <div class="">
+                            @Html.ActionLink("और पढें..", "Index", "Section", new { @categoryType = "desh" }, new { title = "देश", Class = "btn btn-default btn-xs" })                                  
+										
+									</div>
+                        </aside>
+            <aside class="widget">
+						<h2 class="widget-title ribbon ribbon-focus"><span>विदेश</span></h2>
+                        <div class="entries row">
+                          @if (Model.HomePageCat2 != null)
+                          {
+                              foreach (var article in Model.HomePageCat2)
+                              { 
+                              <article class="type-post style-media-list style-review-list media col-sm-6 col-md-12">
+
+								@*<div class="style-review-score">
+									80
+								</div>	*@						
+								@*<img src="../../Content/images/nirvachan-186x120.jpg" data-src="../../Content/images/nirvachan-186x120.jpg" data-src-retina="../../Content/images/nirvachan-186x120.jpg" width="80" height="80" class="media-object pull-left" alt="" style="opacity: 1;" />*@
+                                  @if (!string.IsNullOrEmpty(article.Image_path))
+                                  {
+                                 
+                                
+                                                <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                <img src="@article.Image_path" data-src="@article.Image_path" data-src-retina="@article.Image_path"
+                                                        width="80" height="80" alt="@article.Title" class="media-object pull-left" />
+                                                <!--fallback for no javascript browsers-->
+                                                <noscript>
+                                                    <img src="@article.Image_path" alt="@article.Title" width="80" height="80">
+                                                </noscript>
+                                          
+								
+								<noscript>
+									&lt;img src="@article.Image_path" alt=""&gt;
+								</noscript>
+                                  }
+                                 
+								<div class="media-body">
+									<h3 class="entry-title">
+										@Html.ActionLink(article.Title, "Index", "Post", new { articleId = article.ID, articleTitle = article.Title_SEO }, new { title = article.Title, rel = "bookmark" }) 
+									</h3>
+									<div class="entry-meta">
+                                         @{var dt = article.Modified_Date != null ? article.Modified_Date.Value.ToString("dd MMM yyyy") : "";}
+                                 <span class="entry-date"><time datetime ="@article.Modified_Date">@dt</time></span>
+                                 </div>
+								</div>
+
+							</article>
+                              
+                              }
+                          }
+							
+                          
+                               
+                            </div>
+                            <div class="">
+                            @Html.ActionLink("और पढें..", "Index", "Section", new { @categoryType = "videsh" }, new { title = "विदेश", Class = "btn btn-default btn-xs" })                                  
+										
+									</div>
+                        </aside>
+            <aside class="widget">
+						<h2 class="widget-title ribbon ribbon-focus"><span>राज्यों-से</span></h2>
+                        <div class="entries row">
+                          @if (Model.HomePageCat4 != null)
+                          {
+                              foreach (var article in Model.HomePageCat4)
+                              { 
+                              <article class="type-post style-media-list style-review-list media col-sm-6 col-md-12">
+
+								 @if (!string.IsNullOrEmpty(article.Image_path))
+                                 {                                 
+                                
+                                                <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                <img src="@article.Image_path" data-src="@article.Image_path" data-src-retina="@article.Image_path"
+                                                        width="80" height="80" alt="@article.Title" class="media-object pull-left"/>
+                                                <!--fallback for no javascript browsers-->
+                                                <noscript>
+                                                    <img src="@article.Image_path" alt="@article.Title" width="80" height="80">
+                                                </noscript>
+                                          
+								
+								<noscript>
+									&lt;img src="@article.Image_path" alt=""&gt;
+								</noscript>
+                                 }
+                                 
+
+								<div class="media-body">
+									<h3 class="entry-title">
+										@Html.ActionLink(article.Title, "Index", "Post", new { articleId = article.ID, articleTitle = article.Title_SEO }, new { title = article.Title, rel = "bookmark" }) 
+									</h3>
+									<div class="entry-meta">
+                                         @{var dt = article.Modified_Date != null ? article.Modified_Date.Value.ToString("dd MMM yyyy") : "";}
+                                 <span class="entry-date"><time datetime ="@article.Modified_Date">@dt</time></span>
+                                 </div>
+								</div>
+
+							</article>
+                              
+                              }
+                          }
+							
+                          
+                               
+                            </div>
+                            <div class="">
+                            @Html.ActionLink("और पढें..", "Index", "Section", new { @categoryType = "raajyon-se" }, new { title = "राज्यों-से", Class = "btn btn-default btn-xs" })                                  
+										
+									</div>
+                        </aside>
+            <aside class="widget">
+						<h2 class="widget-title ribbon ribbon-focus"><span>दिल्ली चुनाव विशेष</span></h2>
+                        <div class="entries row">
+                          @if (Model.HomePageCat1 != null)
+                          {
+                              foreach (var article in Model.HomePageCat1)
+                              { 
+                              <article class="type-post style-media-list style-review-list media col-sm-6 col-md-12">
+
+								<div class="style-review-score">
+									New
+								</div>							
+								@*<img src="../../Content/images/nirvachan-186x120.jpg" data-src="../../Content/images/nirvachan-186x120.jpg" data-src-retina="../../Content/images/nirvachan-186x120.jpg" width="80" height="80" class="media-object pull-left" alt="" style="opacity: 1;" />*@
+                                 @if (!string.IsNullOrEmpty(article.Image_path))
+                                 {
+                                                <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                <img src="@article.Image_path" data-src="@article.Image_path" data-src-retina="@article.Image_path"
+                                                        width="80" height="80" alt="@article.Title" class="media-object pull-left" />
+                                                <!--fallback for no javascript browsers-->
+                                                <noscript>
+                                                    <img src="@article.Image_path" alt="@article.Title" width="80" height="80">
+                                                </noscript>
+                                            
+								
+								<noscript>
+									&lt;img src="@article.Image_path" alt=""&gt;
+								</noscript>
+                                 }
+                                 
+
+								<div class="media-body">
+									<h3 class="entry-title">
+                                      @Html.ActionLink(article.Title, "Index", "Post", new { articleId = article.ID, articleTitle = article.Title_SEO }, new { title = article.Title, rel = "bookmark" })                                  										
+									</h3>
+									<div class="entry-meta">
+                                         @{var dt = article.Modified_Date != null ? article.Modified_Date.Value.ToString("dd MMM yyyy") : "";}
+                                 <span class="entry-date"><time datetime ="@article.Modified_Date">@dt</time></span>
+                                 </div>
+								</div>
+
+							</article>
+                              
+                              }
+                          }
+							
+                          
+                               
+                            </div>
+                            <div class="">
+                            @Html.ActionLink("और पढें..", "Index", "Section", new { @categoryType = "delhi-chunav-vishesh" }, new { title = "दिल्ली चुनाव विशेष", Class = "btn btn-default btn-xs" })                                  
+										
+									</div></aside>
+        </div>
+    @*    <!--/.collapsible-widgets-->
+        @if (Model.Tags != null)
+        {
+            if (Model.Tags.Count > 0)
+            {
+            <aside class="widget">
+						<h3 class="widget-title ribbon ribbon-focus"><span>टेग्स</span></h3>
+                        <div class="tagcloud">
+             @foreach (var tag in Model.Tags)
+             {
+              @Html.ActionLink(tag.name, "Index", "Tag", new { @tagged = tag.name }, new { title = tag.name, Class = "btn btn-default btn-xs" })                                                                 
+             }</div></aside>
+            }
+        }*@
+    </div>
+</div>
+<div class="content section row">
+				
+				<h2 class="section-title ribbon"><span>अन्य खबरें</span></h2>
+				
+				<div class=" row entries">
+
+					<div class="row">
+                     @if (Model.RelatedNews != null)
+                     {
+                         foreach (var article in Model.RelatedNews)
+                         {   
+						<article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1">
+							
+							<div class="entry-meta">
+								<span class="category">@Html.ActionLink(article.Category.Name, "Index", "Section", new { categoryType = article.Category.Name_english }, new { @title = article.Category.Name })</span>
+							</div>
+
+							<h3 class="entry-title">
+							@Html.ActionLink(article.Title, "Index", "Post", new { articleId = article.ID, articleTitle = article.Title_SEO }, new { title = article.Title, rel = "bookmark" }) 
+							</h3>
+
+						</article>						
+                         }
+                     }
+					</div><!--row.-->
+
+				</div><!--entries.-->
+
+			</div>
+<div class="content section row">
+    <div id="vedioCarousel" class="section bg-primary carousel carousel slide">
+        <h2 class="section-title ribbon">
+            <a href="#">नये वीडियो</a></h2>
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="row entries">
+                    <article class="entry style-grid type-post col-md-6 col-lg-3 colheight-sm-1">
+								
+								<header class="entry-header">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="http://www.youtube.com/watch?v=ULPh7BZGh6k" rel="prettyPhoto">डेल्ही एलेकशन 2013: आम आदमी पार्टी बिगिन्स 'झाडू चलाओ यात्रा !</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="2013-07-04T23:26:34+00:00">10 hours ago</time></a></span>
+										<span class="entry-author"> by <a href="#">सहारा न्यूज़</a></span>
+									</div>
+								</header>
+								
+								<figure class="entry-thumbnail">
+
+									<a href="#" class="overlay overlay-primary"></a>
+
+									<!-- to disable lazy loading, remove data-src and data-src-retina -->
+									<img src="" data-src="" data-src-retina="" width="480" height="280" alt="" style="opacity: 1;">
+
+									<!--fallback for no javascript browsers-->
+									<noscript>
+										&lt;img src="" alt=""&gt;
+									</noscript>
+
+								</figure>
+
+							</article>
+                    <article class="entry style-grid type-post col-md-6 col-lg-3 colheight-sm-1">
+
+								<header class="entry-header">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="http://www.youtube.com/watch?v=jjul3vNdSKE" rel="prettyPhoto">आपकी राय, AAP कि सरकार</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="2013-07-04T23:26:34+00:00">5 hours ago</time></a></span>
+										<span class="entry-author"> by <a href="#">सहारा न्यूज़</a></span>
+									</div>
+								</header>
+								
+								<figure class="entry-thumbnail">
+
+									<a href="#" class="overlay overlay-primary"></a>
+
+									<!-- to disable lazy loading, remove data-src and data-src-retina -->
+									<img src="" data-src="" data-src-retina="" width="680" height="452" alt="" style="opacity: 1;">
+
+									<!--fallback for no javascript browsers-->
+									<noscript>
+										&lt;img src="" alt=""&gt;
+									</noscript>
+
+								</figure>
+
+							</article>
+                    <article class="entry style-grid type-post col-md-6 col-lg-3 colheight-sm-1">
+								<header class="entry-header">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="http://www.youtube.com/watch?v=VIr5eTrGj0o" rel="prettyPhoto">घोटालों की है सरकार: कुमार विश्वास</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="2013-07-04T23:26:34+00:00">7 hours ago</time></a></span>
+										<span class="entry-author"> by <a href="#">ABP न्यूज़</a></span>
+									</div>
+								</header>
+
+								<figure class="entry-thumbnail">
+
+									<a href="#" class="overlay overlay-primary"></a>
+
+									<!-- to disable lazy loading, remove data-src and data-src-retina -->
+									<img src="" data-src="" data-src-retina="" width="480" height="280" alt="" style="opacity: 1;">
+
+									<!--fallback for no javascript browsers-->
+									<noscript>
+										&lt;img src="" alt=""&gt;
+									</noscript>
+
+								</figure>
+
+							</article>
+                    <article class="entry style-grid type-post col-md-6 col-lg-3 colheight-sm-1">
+								<header class="entry-header">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="http://www.youtube.com/watch?v=aYwILpzFlXE" rel="prettyPhoto">सरकार ने लोकपाल कानून को और कमजोर कर दिया: केजरीवाल</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="2013-07-04T23:26:34+00:00">12 hours ago</time></a></span>
+										<span class="entry-author"> by <a href="#">संजीव शर्मा</a></span>
+									</div>
+								</header>
+								
+								<figure class="entry-thumbnail">
+
+									<a href="#" class="overlay overlay-primary"></a>
+
+									<!-- to disable lazy loading, remove data-src and data-src-retina -->
+									<img src="" data-src="" data-src-retina="" width="480" height="280" alt="" style="opacity: 1;">
+
+									<!--fallback for no javascript browsers-->
+									<noscript>
+										&lt;img src="" alt=""&gt;
+									</noscript>
+
+								</figure>
+
+							</article>
+                </div>
+                <!--/.row.entries-->
+            </div>
+            <!--/.item-->
+            <div class="item">
+                <div class="row entries">
+                    <article class="entry style-grid type-post col-md-6 col-lg-3 colheight-sm-1">
+								<header class="entry-header">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="http://www.youtube.com/watch?v=8uH_XMPOVC4" rel="prettyPhoto">दिल्ली के दिल में क्या है - आज तक - फुल वीडियो</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="2013-07-04T23:26:34+00:00">2 month ago</time></a></span>
+										<span class="entry-author"> by <a href="#">विक्रमजीत कपूर</a></span>
+									</div>
+								</header>
+								
+								<figure class="entry-thumbnail">
+
+									<a href="#" class="overlay overlay-primary"></a>
+
+									<!-- to disable lazy loading, remove data-src and data-src-retina -->
+									<img src="" data-src="" data-src-retina="" width="480" height="280" alt="" style="opacity: 1;">
+
+									<!--fallback for no javascript browsers-->
+									<noscript>
+										&lt;img src="" alt=""&gt;
+									</noscript>
+
+								</figure>
+
+							</article>
+                    <article class="entry style-grid type-post col-md-6 col-lg-3 colheight-sm-1">
+								<header class="entry-header">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="http://www.youtube.com/watch?v=Nj-cLaCC0KE" rel="prettyPhoto">Everything you want to know about Aam Aadmi Party</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="2013-07-04T23:26:34+00:00">20 days ago</time></a></span>
+										<span class="entry-author"> by <a href="#">आम आदमी</a></span>
+									</div>
+								</header>
+								
+								<figure class="entry-thumbnail">
+
+									<a href="#" class="overlay overlay-primary"></a>
+
+									<!-- to disable lazy loading, remove data-src and data-src-retina -->
+									<img src="" data-src="" data-src-retina="" width="480" height="280" alt="" style="opacity: 1;">
+
+									<!--fallback for no javascript browsers-->
+									<noscript>
+										&lt;img src="" alt=""&gt;
+									</noscript>
+
+								</figure>
+
+							</article>
+                    <article class="entry style-grid type-post col-md-6 col-lg-3 colheight-sm-1">
+								
+								<header class="entry-header">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="http://www.youtube.com/watch?v=b5PYGT8Ffu8" rel="prettyPhoto">IBN7 के साथ अरविंद केजरीवाल की खास बातचीत</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="2013-07-04T23:26:34+00:00">12 hours ago</time></a></span>
+										<span class="entry-author"> by <a href="#">IBN7</a></span>
+									</div>
+								</header>
+								
+								<figure class="entry-thumbnail">
+
+									<a href="#" class="overlay overlay-primary"></a>
+
+									<!-- to disable lazy loading, remove data-src and data-src-retina -->
+									<img src="" data-src="" data-src-retina="" width="480" height="280" alt="" style="opacity: 1;">
+
+									<!--fallback for no javascript browsers-->
+									<noscript>
+										&lt;img src="" alt=""&gt;
+									</noscript>
+
+								</figure>
+
+							</article>
+                    <article class="entry style-grid type-post col-md-6 col-lg-3 colheight-sm-1">
+
+								<header class="entry-header">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="http://www.youtube.com/watch?v=kW8sQtFtzVg" rel="prettyPhoto">Arvind Kejriwal turns down Z-plus level security and other headlines.</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="2013-07-04T23:26:34+00:00">12 hours ago</time></a></span>
+										<span class="entry-author"> by <a href="#">DDNewsofficial</a></span>
+									</div>
+								</header>
+								
+								<figure class="entry-thumbnail">
+
+									<a href="#" class="overlay overlay-primary"></a>
+
+									<!-- to disable lazy loading, remove data-src and data-src-retina -->
+									<img src="" data-src="" data-src-retina="" width="680" height="452" alt="" style="opacity: 1;">
+
+									<!--fallback for no javascript browsers-->
+									<noscript>
+										&lt;img src="" alt=""&gt;
+									</noscript>
+
+								</figure>
+
+							</article>
+                </div>
+                <!--/.row.entries-->
+            </div>
+        </div>
+        <a class="left carousel-control" href="#vedioCarousel" data-slide="prev"><span class="icon icon-angle-left">
+        </span></a><a class="right carousel-control" href="#vedioCarousel" data-slide="next">
+            <span class="icon icon-angle-right"></span></a>
+    </div>
+</div>
+
+

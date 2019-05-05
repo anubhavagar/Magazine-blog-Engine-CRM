@@ -1,0 +1,257 @@
+﻿@model AapkiMagazine.Models.PostViewModel
+@using System.Globalization
+@using AapkiMagazine.Models;
+@{    
+    if (Model.ArticleItem != null) { ViewBag.Title = Model.ArticleItem.Title + " | मैं हूँ आम आदमी"; }
+    else
+    {
+        ViewBag.Title = "Page Not Found | मैं हूँ आम आदमी";
+    }
+    ViewBag.Keywords = string.Empty;
+    if (Model.ArticleItem != null)
+    {
+        if (!string.IsNullOrEmpty(Model.ArticleItem.Title_SEO))
+        {
+            ViewBag.Keywords = "Main Hun Aam Aadmi, Post" + ", " + Model.ArticleItem.Title_SEO;
+        }
+    }
+
+    ViewBag.Description = "Post - Main Hun Aam Aadmi  ";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    BreakingNews breakingNews = new BreakingNews { BreakingNewsItems = Model.BreakingNewsItems };
+    @Html.Partial("_BreakingNews", breakingNews)
+}
+<div id="content" class="content section row">
+    @if (Model.ArticleItem != null)
+    {      
+      
+        <div class="col-md-8 bg-base col-lg-8 col-xl-9">
+            <div class="ribbon ribbon-focus">
+                <ol class="breadcrumb ribbon-inner">
+                    <li><a href="#" onclick="location.href='@Url.Action("Index", "Home")'"><i class="icon-home"></i></a></li>
+                    @if (!string.IsNullOrEmpty(Model.ArticleItem.Category.Name))
+                    { 
+                        <li>
+                            @Html.ActionLink(Model.ArticleItem.Category.Name, "Index", "Section", new { categoryType = Model.ArticleItem.Category.Name_english }, new { @title = Model.ArticleItem.Category.Name })
+                        </li>
+                  
+                    }
+                    @if (!string.IsNullOrEmpty(Model.ArticleItem.Title))
+                    { 
+                        <li>
+                            @Html.ActionLink(Model.ArticleItem.Title, "Index", "Post", new { articleId = Model.ArticleItem.ID, articleTitle = Model.ArticleItem.Title_SEO }, new { @title = Model.ArticleItem.Title })
+                        </li>
+                    }
+                </ol>
+            </div>
+            <header class="page-header">
+						<h2 class="" style=" text-align:center;">
+							@Model.ArticleItem.Title
+						</h2>
+
+					</header>
+            <article class="entry style-single type-post">
+						<div class="entry-meta indented">
+                         @if (Model.ArticleItem.Author != null)
+                         { 
+							<span class="author">by <a href="#">@Model.ArticleItem.Author</a></span>
+                         }
+                            				 @if (Model.ArticleItem.Created_Date != null)
+                                 { 
+                                 <span class="entry-date"><a href="#">on <time datetime="@Model.ArticleItem.Created_Date">@Model.ArticleItem.Created_Date.ToString("dd MMM yyyy")</time></a></span>
+                                 
+                                 }
+							
+							 @if (Model.ArticleItem.Company != null)
+        {<span class="category"> - <a href="#">
+                            @Model.ArticleItem.Company</a></span> }
+                            
+						</div>
+                        <div id="textsizer-classnames">                  
+                   <ul class="textresizer">
+                       <li><a href="#nogo" class="small-text" title="Small">A</a></li>
+                       <li><a href="#nogo" class="medium-text" title="Medium">A</a></li>
+                       <li><a href="#nogo" class="large-text" title="Large">A</a></li>
+                       <li><a href="#nogo" class="larger-text" title="Larger">A</a></li>
+                   </ul>
+                </div>
+
+						<div class="entry-content indented">
+                       <article id = "post-content">
+                       
+                         @if (Model.ArticleItem.Content != null)
+                         {
+                                @Html.Raw(Model.ArticleItem.Content)
+                           
+                         }		</article>		
+						</div>
+
+					</article>
+            <div class="after-entry indented">
+                <hr />
+                <h4>
+                    दोस्तों के साथ शेअर करें:</h4>
+                @{
+                         var addr = Model.ArticleItem.ID + "/" + Model.ArticleItem.Title_SEO;
+                
+                    <aside class="widget"><a data-toggle="tooltip" data-placement="bottom"
+                            title="Share on Facebook" href="#" class="" onclick="window.open(
+								'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+								'facebook-share-dialog', 
+								'width=626,height=436'); 
+								return false;"><span class="icon-stack"><i class="icon-sign-blank icon-stack-base"></i>
+                                    <i class="icon-facebook icon-light"></i></span></a>
+                       <a data-toggle="tooltip" data-placement="bottom"
+                            title="Share on Twitter" href="#" class="" onclick="window.open(
+								'http://twitter.com/home?status='+encodeURIComponent(location.href), 
+								'facebook-share-dialog', 
+								'width=626,height=436'); 
+								return false;"><span class="icon-stack"><i class="icon-sign-blank icon-stack-base"></i>
+                                    <i class="icon-twitter icon-light"></i></span></a>
+                        <a data-toggle="tooltip" data-placement="bottom"
+                            title="Share on Google-Plus" href="#" class="" onclick="window.open(
+								'https://plus.google.com/share?url='+encodeURIComponent(location.href), 
+								'facebook-share-dialog', 
+								'width=500,height=436'); 
+								return false;"><span class="icon-stack"><i class="icon-sign-blank icon-stack-base"></i>
+                                    <i class="icon-google-plus icon-light"></i></span></a>
+                   </aside>
+                }
+                <hr />
+            </div>
+            <!--/#comments-->
+            <div id="comments" class="comments-area indented">
+                <h4 class="comments-title">
+                    Comments</h4>
+                <!-- add the div to receive the comments via ajax -->
+                <div id="disqus_thread">
+                </div>
+                <script type="text/javascript">
+                    var disqus_shortname = '@AapkiMagazine.Helper.Helper_Magazine.DisqusShortName';
+                    var disqus_identifier = 'comments-league-@Html.Encode(Model.ArticleItem.ID)';
+                    var disqus_url = '@HttpContext.Current.Request.Url';
+                    // using disqus_developer = 1 helps to debug to localhost etc..
+                    // var disqus_developer = 1;
+
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function () {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+            </div>
+        </div>
+        <!--/.col-md-8.col-lg-8.col-xl-9-->
+        <div class="sidebar col-md-4 col-lg-4 col-xl-3">
+            @if (!string.IsNullOrEmpty(Model.ArticleItem.Image_path))
+            { 
+                <aside class="widget">
+
+						<h3 class="widget-title ribbon"><span>तस्वीर</span></h3>
+
+						<figure class="">
+
+							<!-- to disable lazy loading, remove data-src and data-src-retina -->
+							<img src="@Model.ArticleItem.Image_path" alt="@Model.ArticleItem.Title" class="media-object" data-src="@Model.ArticleItem.Image_path" data-src-retina="@Model.ArticleItem.Image_path" width="400" height="300" alt="" />
+
+							<!--fallback for no javascript browsers-->
+							<noscript>								
+                                &lt;img src="@Model.ArticleItem.Image_path" alt=""&gt;
+							</noscript>
+
+						</figure>
+
+					</aside>
+                <!--/.widget-->
+            }
+            @if (!string.IsNullOrEmpty(Model.ArticleItem.Video_url))
+            { 
+                <aside class="widget">
+
+						<h3 class="widget-title ribbon"><span>वीडियो</span></h3>
+
+						<header class="entry-header aligncenter">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="@Model.ArticleItem.Video_url" rel="prettyPhoto">@Model.ArticleItem.Title</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="@Model.ArticleItem.Created_Date">@Model.ArticleItem.Created_Date.ToString("dd MMM yyyy") </time></a></span>
+										<span class="entry-author"> by <a href="#">@Model.ArticleItem.Company</a></span>
+									</div>
+								</header>
+
+					</aside>
+                <!--/.widget-->
+            }
+            <aside class="widget">
+
+						<h3 class="widget-title ribbon "><span>टेग्स</span></h3>
+        @if (Model.ArticleItem.Tags != null)
+        {
+           
+                        <div class="tagcloud">
+             @foreach (var tag in Model.ArticleItem.Tags)
+             { 
+             @Html.ActionLink(tag.name, "Index", "Tag", new { @tagged = tag.name }, new { title = tag.name, Class = "btn btn-default btn-xs" })             
+             }</div>
+        }
+        else
+        { <p>No Tags for this post</p> }</aside>
+            <!--/.widget-->
+            <aside class="widget">
+						<h3 class="widget-title ribbon"><span>अन्य खबरें</span></h3>
+                        
+                         @if (Model.RelatedNews != null)
+                         {
+                             foreach (var article in Model.RelatedNews)
+                             {                          
+                             
+                              <article class="type-post style-media-list style-review-list media col-sm-6 col-md-12">
+								                                
+                                @if (!string.IsNullOrEmpty(article.Image_Path))
+                                {
+                                                <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                <img src="@article.Image_Path" data-src="@article.Image_Path" data-src-retina="@article.Image_Path"
+                                                        width="80" height="80" alt="@article.Title" class="media-object pull-left"/>
+                                                <!--fallback for no javascript browsers-->
+                                                <noscript>
+                                                    <img src="@article.Image_Path" alt="@article.Title" width="80" height="80">
+                                                </noscript>
+                                          
+								
+								<noscript>
+									&lt;img src="@article.Image_Path" alt=""&gt;
+								</noscript>
+                                }
+                                 
+
+								<div class="media-body">
+									<h3 class="entry-title">
+										@Html.ActionLink(article.Title, "Index", "Post", new { articleId = article.Article_id, articleTitle = article.Title_SEO }, new { title = article.Title, rel = "bookmark" }) 
+									</h3>
+									<p class="small"></p>
+								</div>
+
+							</article>
+                             
+                             }
+
+                         }
+
+					</aside>
+        </div>
+    }
+    else
+    {
+        Model.PageNotFound = new PageNotFound { Error = "Page Not Found", Message = "We couldn't find the page you requested" };           
+            @Html.Partial("_PageNotFound", Model.PageNotFound)
+      
+    }
+</div>
+<script src="../../Scripts/js/jquery.cookie.js" type="text/javascript"></script>
+<script src="../../Scripts/js/text-sizer.js" type="text/javascript"></script>

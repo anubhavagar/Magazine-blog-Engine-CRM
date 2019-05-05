@@ -1,0 +1,177 @@
+﻿@model AapkiMagazine.Models.ArticleViewModel
+@{
+    ViewBag.Title = "ArticleOption";
+    Layout = "~/Views/Shared/_Layout_Manage.cshtml";
+}
+@using (Html.BeginForm("ArticleOption", "Manage", FormMethod.Post, new { id = "manageindexform", enctype = "multipart/form-data" }))
+{ 
+    @Html.AntiForgeryToken();
+    <div class="container">
+        <div class="content section row">
+            <div class="alert alert-warning" id="error_alert" style="display: none;">
+                <button type="button" class="close">
+                    &times;</button>
+                @Html.ValidationSummary(true)
+                @if (Model.Errors != null)
+                {
+                    foreach (var error in Model.Errors)
+                    {                   
+                    <p>
+                        @error
+                    </p>
+                    }
+                }
+            </div>
+        </div>
+        @if (Model.ArticleItem != null)
+        { 
+            @Html.HiddenFor(model => model.ArticleItem.ID, new
+   {
+       id = "hdnId",
+       name = "hdnId"
+   })
+            <div class="content section row">
+                <div class="col-md-9 col-lg-9">
+                    <div class="row">
+                        @if (Model.ArticleItem.Title != null)
+                        {
+                            <h2 class="">
+                                @Model.ArticleItem.Title
+                            </h2>
+                        }
+                        <div class="entry-meta">
+                            @if (Model.ArticleItem.Author != null)
+                            {
+                                <span class="author">@Model.ArticleItem.Author</span>
+                            }
+                            @if (Model.ArticleItem.Created_Date != null)
+                            {
+                                <span class="entry-date">
+                                    <time datetime=""> | @Model.ArticleItem.Created_Date</time>
+                                </span>
+                            }
+                            @if (Model.ArticleItem.Company != null)
+                            {
+                                <span class="category">- @Model.ArticleItem.Company</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <div class="row">
+                        <input id="btnsubmit-prev" value="Previous Step" type="submit" name="command" class="btn btn-default"
+                            title="cancel to previous step" />
+                        <input id="btnsubmit-publish" value="Submit to Publish" type="submit" name="command" class="btn btn-warning"
+                            title="submit to publish article" />
+                    </div>
+                </div>
+            </div>
+            <div id="content" class="content section row">
+                <div class="col-md-9 col-lg-9">
+                    <div class="row">
+                        <div class="entry-content">
+                            @if (Model.ArticleItem.Content != null)
+                            {
+                                @Html.Raw(Model.ArticleItem.Content)
+                           
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar col-md-3 col-lg-3">
+                    <aside class="widget">
+
+							<h2 class="widget-title ribbon"><span>Upload Picture</span></h2>
+							<ul class="entries">
+                                     @{
+                            var path = "";
+                            if (!string.IsNullOrEmpty(Model.ArticleItem.Image_path))
+                            {
+                                path = Model.ArticleItem.Image_path;
+                            }
+} 
+
+                                @if (string.IsNullOrEmpty(path))
+                                {
+                       <li class="entry style-recent-list">
+                                    <input type="file" id="uplimage" class="form-control" accept=".PNG,.JPG,.BMP,.GIF" name="uplimage" />
+                                    <input id="btnsubmit-upload" type="submit" class="btn btn-success btn-xs" value="Upload" name="command" />  
+									</li><li><small>please limit size of image to 250kb, <i>allowed image ext. .PNG,.JPG,.BMP,.GIF</i></small></li>
+                                    <li><div id="uploadimgalert" class="alert" style=" display:none;"></div></li>
+                                }
+									
+                                    @if (!string.IsNullOrEmpty(path))
+                                    {
+                                    <li>@Html.HiddenFor(model => model.ArticleItem.Image_path)
+                                                          <img id = "imgProduct" src="@path" alt="" width="160" height="160" />
+                                    <input id="btnDeleteImg" type="submit" value="Delete" name="command"  class="btn btn-danger btn-xs" onclick="return confirm('Do you really want to delete this image associated with the article?')" /></li>
+                                    }
+                                    
+                                    </ul>
+						</aside>
+                    <aside class="widget">
+
+							<h2 class="widget-title ribbon"><span>Enter video URL - YouTube</span></h2>
+							<ul class="entries">
+
+									
+                                    <li class="entry style-recent-list">
+                                       @Html.HiddenFor(model => model.ArticleItem.validyturl, new
+                                  {
+                                      id = "hdnvalidyturl",
+                                      name = "hdnvalidyturl"
+                                  })
+                                   
+                                    @Html.TextBoxFor(m => m.ArticleItem.Video_url, new
+                               {
+                                   placeholder = "youtube video url",
+                                   Class = "form-control",
+                                   title = "youtube video url",
+                                   id = "video_youtube_path"
+                               })
+                                    
+									</li><li><small>url format: <i>http://www.youtube.com/watch?v=-rmGc4vTQM0</i></small> </li><li><div id="validurlalert" class="alert" style=" display:none;"></div></li></ul>
+						</aside>
+                    <aside class="widget">
+
+							<h2 class="widget-title ribbon"><span>Category</span></h2>
+
+							<ul class="entries radio">
+                                    <li class="entry style-recent-list">
+                                      @if (Model.ArticleItem.Category != null)
+                                      {
+										<input type="radio" name="category" value="@Model.ArticleItem.Category.Id" checked="checked" />
+		                                <label for="@Model.ArticleItem.Category.Id" class="label label-success">@Model.ArticleItem.Category.Name</label>
+                                      }
+									</li>
+                                    
+</ul>
+
+						</aside>
+                    <aside class="widget">
+
+						<h3 class="widget-title ribbon"><span>TAGS</span></h3>
+             @if (Model.ArticleItem.Tags != null)
+             {
+            
+                        <div class="tagcloud">
+             @foreach (var tag in Model.ArticleItem.Tags)
+             { 
+             <a href="#"> @tag.name </a>
+             
+             }</div>
+             }
+             else
+             { 
+             <div class="tagcloud">No Tags Selected</div>
+             
+             }
+        
+        </aside>
+                </div>
+            </div>
+        }
+    </div>
+    <script src="../../Scripts/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/js/Article_Options.js" type="text/javascript"></script>
+}

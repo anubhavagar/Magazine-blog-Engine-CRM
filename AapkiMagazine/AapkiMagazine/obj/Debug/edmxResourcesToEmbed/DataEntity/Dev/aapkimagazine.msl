@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="aapkimagazineModelStoreContainer" CdmEntityContainer="aapkimagazineEntities">
+    <EntitySetMapping Name="ArticleCategories">
+      <EntityTypeMapping TypeName="aapkimagazineModel.ArticleCategory">
+        <MappingFragment StoreEntitySet="ArticleCategory">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleEntries">
+      <EntityTypeMapping TypeName="aapkimagazineModel.ArticleEntry">
+        <MappingFragment StoreEntitySet="ArticleEntry">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="title_url" ColumnName="title_url" />
+          <ScalarProperty Name="content_full" ColumnName="content_full" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="picture_url" ColumnName="picture_url" />
+          <ScalarProperty Name="video_url" ColumnName="video_url" />
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Articles">
+      <EntityTypeMapping TypeName="aapkimagazineModel.Article">
+        <MappingFragment StoreEntitySet="Articles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="aapkimagazineModel.Tag">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="article_id" ColumnName="article_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PortalUserProfiles">
+      <EntityTypeMapping TypeName="aapkimagazineModel.PortalUserProfile">
+        <MappingFragment StoreEntitySet="PortalUserProfiles">
+          <ScalarProperty Name="pwdchangedate" ColumnName="pwdchangedate" />
+          <ScalarProperty Name="salt" ColumnName="salt" />
+          <ScalarProperty Name="user_email" ColumnName="user_email" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

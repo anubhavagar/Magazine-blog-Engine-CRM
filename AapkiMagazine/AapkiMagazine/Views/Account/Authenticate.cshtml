@@ -1,0 +1,156 @@
+﻿@using Recaptcha;
+@model AapkiMagazine.Models.LogOnModel
+@{
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+}
+<div class="container">
+    <div class="frame-signin">
+        @using (Html.BeginForm("Authenticate", "Account", FormMethod.Post, new { @class = "form-signin", @role = "form" }))
+        { 
+          
+                        <img src="../../Content/images/authenticate_bg.jpg" style=" display:none;"/>
+            <h2 class="form-signin-heading">
+                मैं हूँ आम आदमी Authentication</h2>           
+            <div id="success" style="display: none">
+                <button type="button" class="close">
+                    &times;</button></div>
+            <div id="validationerror" style="display: none" class="alert">
+                <button type="button" class="close">
+                    &times;</button>
+                @Html.ValidationSummary(true)<br />
+                <div class="loginvalidation" style=" display:none;">
+                    @Html.ValidationMessageFor(model => model.UserEmail)<br />
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+                <div class="registervalidation" style=" display:none;">
+                    @Html.ValidationMessageFor(model => model.Email_New)<br />
+                    @Html.ValidationMessageFor(model => model.Password_New)<br />
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword_New)<br />
+                    @Html.ValidationMessageFor(model => model.FirstName)<br />
+                    @Html.ValidationMessageFor(model => model.LastName)                  
+                </div>
+                <div class="forgotpwdvalidation" style=" display:none;">@Html.ValidationMessageFor(model => model.Email_Reset)</div>
+            </div>
+            <div class="login-form">
+                @Html.TextBoxFor(m => m.UserEmail, new
+           {
+               type = "text",
+               placeholder = "Email address",
+               Class = "form-control",
+               title = "Enter your email address",
+               id = "user_email"
+           })
+                @Html.TextBoxFor(m => m.Password, new
+           {
+               type = "password",
+               placeholder = "Password",
+               Class = "form-control",
+               title = "Password",
+               id = "user_pwd"
+           })
+                @*<input type="text" class="form-control" placeholder="Email address" autofocus />*@
+                @*<input type="password" class="form-control" placeholder="Password" />*@
+                <input id="btnsubmit-signin" value="Sign in" type="submit" name="command" class="btn btn-lg btn-primary btn-block"
+                    title="Sign in" />
+                <br />
+                <div class="form-options">
+                    Need an account?
+                    <input id="register" value="Register here" type="button" name="command" class="btn btn-default btn-xs"
+                        title="Register" />
+                    <br />
+                    <small><a href="" id="forgotpwd">Forgot Password?</a></small></div>
+            </div>
+            <div class="register-form">
+                <p>
+                    Enter your details and we will send you a link to finish regestration.</p>
+                @Html.TextBoxFor(m => m.Email_New, new
+           {
+               type = "text",
+               placeholder = "Email address",
+               Class = "form-control",
+               title = "Enter your email address",
+               id = "new_email"
+           })
+                @Html.TextBoxFor(m => m.Password_New, new
+           {
+               type = "password",
+               placeholder = "Password",
+               Class = "form-control",
+               title = "Password",
+               id = "new_pwd"
+           })
+                @Html.TextBoxFor(m => m.ConfirmPassword_New, new
+           {
+               type = "password",
+               placeholder = "Confirm Password",
+               Class = "form-control",
+               title = "Confirm Password",
+               id = "new_pwd_confirm"
+           })
+                @*<input type="text" class="form-control" placeholder="Email address" autofocus />
+                    <input type="password" class="form-control" placeholder="Password" />
+                    <input type="password" class="form-control" placeholder="Confirm Password" />*@
+                <hr />
+                @Html.TextBoxFor(m => m.FirstName, new
+           {
+               type = "text",
+               placeholder = "First Name",
+               Class = "form-control",
+               title = "Enter your first name",
+               id = "new_firstname"
+           })
+                @Html.TextBoxFor(m => m.LastName, new
+           {
+               type = "text",
+               placeholder = "Last Name",
+               Class = "form-control",
+               title = "Enter your last name",
+               id = "new_lastname"
+           })
+                @*<input type="text" class="form-control" placeholder="First Name" autofocus />
+                    <input type="text" class="form-control" placeholder="Last Name" />*@
+                <div>
+                   <br /><small>Are You Human?</small> 
+                </div>
+                <div class="">
+                    @Html.Raw(Html.GenerateCaptcha("captcha", "clean"))
+                    @Html.ValidationMessage("captcha")
+                </div>
+                <br />
+                <input id="submit_register" value="Register" type="submit" name="command" class="btn btn-lg btn-danger btn-block"
+                    title="Register" /><br />
+                <div class="form-options">
+                    <input id="register_backtologin" value="Back to login" type="button" name="command"
+                        class="btn btn-default btn-xs" title="Back to login" />
+                </div>
+            </div>
+            <div class="forgotpwd-form">
+                <p>
+                    Enter your registered email address to reset your password.</p>
+                @Html.TextBoxFor(m => m.Email_Reset, new
+        {
+            type = "text",
+            placeholder = "Email address",
+            Class = "form-control",
+            title = "Enter your email address",
+            id = "reset_email"
+        })
+                @*<input type="text" class="form-control" placeholder="Email address" autofocus />*@
+                <br />
+                <input id="forgotpwd_resetpwd" value="Reset Password" type="submit" name="command"
+                    class="btn btn-lg btn-success btn-block" title="Reset Password" />
+                <div class="form-options">
+                    <br />
+                    <input id="forgotpwd_backtologin" value="Back to login" type="button" name="command"
+                        class="btn btn-default btn-xs" title="Back to login" />
+                </div>
+            </div>
+          
+            if (ViewBag.StartScript != null)
+            {       
+            @Html.Raw(ViewBag.StartScript);
+            }
+
+        }
+    </div>
+</div>

@@ -1,0 +1,694 @@
+﻿@model AapkiMagazine.Models.DashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout_Manage.cshtml";
+}
+@using (Html.BeginForm("Index", "Manage", FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    <div class="container">
+        <div class="content section row">
+            <div class="navbar-right">
+                <input id="btnsubmit-newarticlelink" value="Create New Article" type="submit" name="command"
+                    class="btn btn-md btn-success" title="Create New Article" />
+            </div>
+            <div id="ajax_loader_div" style="display: none;" align="left">
+                <img src="../../Content/images/ajax-loader.gif" alt="" /><label
+                    id="lblajaxmsg">loading...</label></div>
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#articles">Article Entries</a></li>
+                <li><a href="#articlesPublished">Published</a></li>
+                <li><a href="#articlesArchived">Archived</a></li>
+                @if (Model.userDetail != null)
+                {
+                    if (Model.userDetail.Role == "admin" || Model.userDetail.Role == "ceditor" || Model.userDetail.Role == "sadmin")
+                    {                     
+                    
+                    <li><a id="liuserprofiles" href="#userprofiles">User Profiles</a></li>
+                    <li><a id="lifrontpage" href="#frontpage">Breaking News</a></li>
+                    <li><a id="liCategories" href="#Categories">Categories</a></li>
+                    }
+                }
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="articles">
+                    <table id="tblarticles" class="tablesorter">
+                        @if (Model.ArticleEntryItems != null)
+                        {
+                            if (Model.ArticleEntryItems.Count > 0)
+                            {
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Preview
+                                    </th>
+                                    <th class="filter-select" data-placeholder="Select
+    a category">
+                                        Category
+                                    </th>
+                                    <th data-placeholder="Search Title">
+                                        Title
+                                    </th>
+                                    <th data-placeholder="Search Author">
+                                        Author
+                                    </th>
+                                    <th class="filter-select" data-placeholder="Choose an author">
+                                        Posted By
+                                    </th>
+                                    <th>
+                                        Created Date
+                                    </th>
+                                    <th>
+                                        Modified Date
+                                    </th>
+                                    <th>
+                                        Picture
+                                    </th>
+                                    <th>
+                                        Video
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var article in Model.ArticleEntryItems)
+                                {  
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-success btnpreviewArticle" data-loading-text="loading preview..." data-url='@Url.Action("PreviewArticleEntry", new { @articleid = article.ID.ToString() })'
+                                     type="button">
+                                                Preview</button>
+                                        </td>
+                                        <td>
+                                            @article.Category.Name
+                                        </td>
+                                        <td>
+                                            <strong>@article.Title</strong>
+                                        </td>
+                                        <td>@article.Author
+                                        </td>
+                                        <td>@article.EmailID
+                                        </td>
+                                        <td>
+                                            @article.Created_Date.ToString("dd MMM yyyy")
+                                        </td>
+                                        <td>
+                                            @if (article.Modified_Date != null)
+                                            {                                              
+                                                @article.Modified_Date.Value.ToString("dd MMM yyyy")  
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(article.Image_path))
+                                            {
+                                                <a href="@article.Image_path" title="@article.Title" class="thumbnail" data-rel="prettyPhoto">
+                                                    <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                    <img src="@article.Image_path" data-src="@article.Image_path" data-src-retina="@article.Image_path"
+                                                        width="80" height="80" alt="@article.Title" />
+                                                    <!--fallback for no javascript browsers-->
+                                                    <noscript>
+                                                        <img src="@article.Image_path" alt="@article.Title" width="80" height="80">
+                                                    </noscript>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    No Image</p>
+
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(article.Video_url))
+                                            {                                            
+                                                <a href="@article.Video_url" rel="prettyPhoto">वीडियो</a>                                          
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    No Video
+                                                </p>
+
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (article.active == null)
+                                            {                                            
+                                                <label class="label label-warning" title="working...">
+                                                    working...</label>                                        
+                                            }
+                                            else if (article.active == 0)
+                                            {
+                                                <label class="label label-danger" title="rejected">
+                                                    rejected</label>
+
+                                            }
+                                            else if (article.active == 1)
+                                            {
+                                                <label class="label label-info" title="submitted">
+                                                    waiting for approval</label>
+
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a class="btn btn-primary  dropdown-toggle" data-toggle="dropdown" href="#">Action <span
+                                                    class="caret"></span></a>
+                                                <ul class="dropdown-menu pull-left">
+                                                    @if ((Model.userDetail.Role == "admin" || Model.userDetail.Role == "ceditor" || Model.userDetail.Role == "sadmin") && (article.active == 1))
+                                                    {     <li>@Html.ActionLink("APPROVE", "Approve", "Manage", new { @articleid = article.ID }, new { @class = "", @title = "Approve Article" })</li>
+                                                        <li>@Html.ActionLink("REJECT", "Reject", "Manage", new { @articleid = article.ID }, new { @class = "", @title = "Reject Article", @onclick = "return confirm('Do you really want to REJECT this article?')" })</li>                                                
+                                                        <li role="presentation" class="divider"></li>
+                                                    }
+                                                    <li>@Html.ActionLink("EDIT", "Edit", "Manage", new { @articleid = article.ID }, new { @class = "", @title = "Edit Article" })</li>
+                                                    <li>@Html.ActionLink("DELETE", "Delete", "Manage", new { @articleid = article.ID }, new { @class = "", @title = "Delete Article", @onclick = "return confirm('Do you really want to DELETE this article?')" })</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            }
+                            else
+                            { 
+                            <tr>
+                                <td>
+                                    <h2>
+                                        No Article Entry in your current worklist.</h2>
+                                    <div id="no_article_entry_message1" class="content section row alert alert-success">
+                                        <button type="button" class="close">
+                                            &times;</button>Welcome to मैं हूँ आम आदमी management portal. You can kick start
+                                        by creating a New Article.</div>
+                                    <br />
+                                    <input id="btnsubmit-newarticlelink1" value="Create New Article" type="submit" name="command"
+                                        class="btn btn-lg btn-success" title="New Article" />
+                                </td>
+                            </tr>
+                            }
+
+                        }
+                        else
+                        { 
+                            <tr>
+                                <td>
+                                    <h2>
+                                        No Article Entry in your current worklist.</h2>
+                                    <div id="no_article_entry_message2" class="content section row alert alert-success">
+                                        <button type="button" class="close">
+                                            &times;</button>Welcome to मैं हूँ आम आदमी management portal. You can kick start
+                                        by creating a New Article.</div>
+                                    <br />
+                                    <input id="btnsubmit-newarticlelink2" value="Create New Article" type="submit" name="command"
+                                        class="btn btn-lg btn-success" title="New Article" />
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="tab-pane" id="articlesPublished">
+                    <table id="tblarticlesPublished" class="tablesorter">
+                        @if (Model.ArticlePublishedItems != null)
+                        {
+                            if (Model.ArticlePublishedItems.Count > 0)
+                            { 
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Preview
+                                    </th>
+                                    <th class="filter-select" data-placeholder="Select
+    a category">
+                                        Category
+                                    </th>
+                                    <th data-placeholder="Search Title">
+                                        Title
+                                    </th>
+                                    <th data-placeholder="Search Author">
+                                        Author
+                                    </th>
+                                    <th class="filter-select" data-placeholder="Choose an author">
+                                        Posted By
+                                    </th>
+                                    <th>
+                                        Created Date
+                                    </th>
+                                    <th>
+                                        Modified Date
+                                    </th>
+                                    <th>
+                                        Picture
+                                    </th>
+                                    <th>
+                                        Video
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var article in Model.ArticlePublishedItems)
+                                { 
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-success btnpreviewArticle" data-loading-text="loading preview..." data-url='@Url.Action("PreviewArticlePublished", new { @articleid = article.ID.ToString() })'
+                                     type="button">
+                                                Preview</button>
+                                        </td>
+                                        <td>
+                                            @article.Category.Name
+                                        </td>
+                                        <td>
+                                            <strong>@article.Title</strong>
+                                        </td>
+                                        <td>@article.Author
+                                        </td>
+                                        <td>@article.EmailID
+                                        </td>
+                                        <td>
+                                            @article.Created_Date.ToString("dd MMM yyyy")
+                                        </td>
+                                        <td>
+                                            @if (article.Modified_Date != null)
+                                            {                                              
+                                                @article.Modified_Date.Value.ToString("dd MMM yyyy")  
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(article.Image_path))
+                                            {
+                                                <a href="@article.Image_path" title="@article.Title" class="thumbnail" data-rel="prettyPhoto">
+                                                    <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                    <img src="@article.Image_path" data-src="@article.Image_path" data-src-retina="@article.Image_path"
+                                                        width="80" height="80" alt="@article.Title" />
+                                                    <!--fallback for no javascript browsers-->
+                                                    <noscript>
+                                                        <img src="@article.Image_path" alt="@article.Title" width="80" height="80">
+                                                    </noscript>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    No Image</p>
+
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(article.Video_url))
+                                            {                                            
+                                                <a href="@article.Video_url" rel="prettyPhoto">वीडियो</a>                                          
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    No Video
+                                                </p>
+
+                                            }
+                                        </td>
+                                        @if (Model.userDetail.Role == "admin" || Model.userDetail.Role == "ceditor" || Model.userDetail.Role == "sadmin")
+                                        { 
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a class="btn btn-primary  dropdown-toggle" data-toggle="dropdown" href="#">Action <span
+                                                        class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>@Html.ActionLink("EDIT", "EditPublished", "Manage", new { @articleid = article.ID }, new { @class = "", @title = "Edit Article" })</li>
+                                                        <li>@Html.ActionLink("ARCHIVE", "Archive", "Manage", new { @articleid = article.ID }, new { @class = "", @title = "Archive Article", @onclick = "return confirm('Do you really want to ARCHIVE this article?')" })</li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                            }
+                            else
+                            { 
+                            <tr>
+                                <td>
+                                    <h2>
+                                        You donot have any published articles
+                                    </h2>
+                                </td>
+                            </tr>
+                            }
+                        }
+                        else
+                        { 
+                            <tr>
+                                <td>
+                                    <h2>
+                                        You donot have any published articles
+                                    </h2>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="tab-pane" id="articlesArchived">
+                    <table id="tblarticlesArchived" class="tablesorter">
+                        @if (Model.ArticleArchivedItems != null)
+                        {
+                            if (Model.ArticleArchivedItems.Count > 0)
+                            {
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Preview
+                                    </th>
+                                    <th class="filter-select" data-placeholder="Select
+    a category">
+                                        Category
+                                    </th>
+                                    <th data-placeholder="Search Title">
+                                        Title
+                                    </th>
+                                    <th data-placeholder="Search Author">
+                                        Author
+                                    </th>
+                                    <th class="filter-select" data-placeholder="Choose an author">
+                                        Posted By
+                                    </th>
+                                    <th>
+                                        Created Date
+                                    </th>
+                                    <th>
+                                        Modified Date
+                                    </th>
+                                    <th>
+                                        Picture
+                                    </th>
+                                    <th>
+                                        Video
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var article in Model.ArticleArchivedItems)
+                                { 
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-success btnpreviewArticle" data-loading-text="loading preview..." data-url='@Url.Action("PreviewArticleArchived", new { @articleid = article.ID.ToString() })'
+                                     type="button">
+                                                Preview</button>
+                                        </td>
+                                        <td>
+                                            @article.Category.Name
+                                        </td>
+                                        <td>
+                                            <strong>@article.Title</strong>
+                                        </td>
+                                        <td>@article.Author
+                                        </td>
+                                        <td>@article.EmailID
+                                        </td>
+                                        <td>
+                                            @article.Created_Date.ToString("dd MMM yyyy")
+                                        </td>
+                                        <td>
+                                            @if (article.Modified_Date != null)
+                                            {                                              
+                                                @article.Modified_Date.Value.ToString("dd MMM yyyy")  
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(article.Image_path))
+                                            {
+                                                <a href="@article.Image_path" title="@article.Title" class="thumbnail" data-rel="prettyPhoto">
+                                                    <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                    <img src="@article.Image_path" data-src="@article.Image_path" data-src-retina="@article.Image_path"
+                                                        width="80" height="80" alt="@article.Title" />
+                                                    <!--fallback for no javascript browsers-->
+                                                    <noscript>
+                                                        <img src="@article.Image_path" alt="@article.Title" width="80" height="80">
+                                                    </noscript>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    No Image</p>
+
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(article.Video_url))
+                                            {                                            
+                                                <a href="@article.Video_url" rel="prettyPhoto">वीडियो</a>                                          
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    No Video
+                                                </p>
+
+                                            }
+                                        </td>
+                                        @if (Model.userDetail.Role == "admin" || Model.userDetail.Role == "ceditor" || Model.userDetail.Role == "sadmin")
+                                        { 
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a class="btn btn-primary  dropdown-toggle" data-toggle="dropdown" href="#">Action <span
+                                                        class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>@Html.ActionLink("DELETE", "DeleteArchive", "Manage", new { @articleid = article.ID }, new { @class = "", @title = "Delete Archived Article", @onclick = "return confirm('Do you really want to permanent delete this ARCHIVED article?')" })</li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                            }
+                            else
+                            { 
+                            <tr>
+                                <td>
+                                    <h2>
+                                        No articles archived</h2>
+                                </td>
+                            </tr>
+                            }
+                        }
+                        else
+                        { 
+                            <tr>
+                                <td>
+                                    <h2>
+                                        No articles archived</h2>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                @if (Model.userDetail != null)
+                {
+                    if (Model.userDetail.Role == "admin" || Model.userDetail.Role == "ceditor" || Model.userDetail.Role == "sadmin")
+                    { 
+                    
+                    <div class="tab-pane" id="userprofiles">
+                        <h3>
+                            Manage Users</h3>
+                        <div id="manage_users_message" class="content section row alert alert-warning">
+                            <button type="button" class="close">
+                                &times;</button>You can assign roles to registered users. User Profiles with
+                            role = 'newuser' donot have management portal access.
+                        </div>
+                        <table id="tblUserProfiles" class="tablesorter">
+                            @if (Model.UserProfiles != null)
+                            {
+                                if (Model.UserProfiles.Count > 0)
+                                {
+                                    
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            First Name
+                                        </th>
+                                        <th>
+                                            Last Name
+                                        </th>
+                                        <th class="filter-select" data-placeholder="Select emailId">
+                                            Email Id
+                                        </th>
+                                        <th class="filter-select" data-placeholder="Select role">
+                                            Role
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.UserProfiles.Count; ++i)
+                                    {
+                                        
+                                        <tr>
+                                            @Html.HiddenFor(model => model.UserProfiles[i].ID, new
+                                       {
+                                           id = "hdnProfileID",
+                                           name = "hdnProfileID"
+                                       })
+                                            <td>
+                                                @Model.UserProfiles[i].First_Name
+                                            </td>
+                                            <td>
+                                                @Model.UserProfiles[i].Last_Name
+                                            </td>
+                                            <td>
+                                                @Model.UserProfiles[i].EmailId
+                                            </td>
+                                            <td>
+                                                @Html.DropDownListFor(model => model.UserProfiles[i].Role, Model.UserProfiles[i].Roles,
+                                            new
+                                            {
+                                                Class = "form-control",
+                                                id = "rolesddl" + i
+                                            })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                }
+                                else
+                                { 
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            No user profiles found</h2>
+                                    </td>
+                                </tr>
+                                }
+                            }
+                            else
+                            { 
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            No user profiles found</h2>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        <input id="btnsubmit-saveProfiles" value="Save User Profiles" type="submit" name="command"
+                            class="btn btn-md btn-success" title="Save User Profiles" />
+                    </div>
+                    <div class="tab-pane" id="frontpage">
+                        <h3>
+                            Breaking News</h3>
+                        <table id="tblBreakingNews" class="tablesorter filter-false">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        News Number
+                                    </th>
+                                    <th>
+                                        Linked To Article
+                                    </th>
+                                    <th>
+                                        Custom News
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.BreakingNews != null)
+                                {
+
+                                    for (int i = 0; i < Model.BreakingNews.Count; ++i)
+                                    {
+                    
+                                    <tr>
+                                        <td>@(i + 1)
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.BreakingNews[i].Article_id, Model.BreakingNews[i].TopNewsDdl, "-- select article for breaking news --",
+                                            new
+                                            {
+                                                Class = "form-control",
+                                                id = "ddl" + i
+                                            })
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(model => model.BreakingNews[i].Id, new
+                                       {
+                                           id = "hdnID",
+                                           name = "hdnID"
+                                       })
+                                            @Html.TextBoxFor(model => model.BreakingNews[i].CustomText, new
+                                       {
+                                           Class = "form-control",
+                                           title = "custom news text for non linked articles",
+                                           id = "txtnews" + i
+                                       })
+                                        </td>
+                                    </tr>
+                    
+                                    }
+
+
+                                }
+                            </tbody>
+                        </table>
+                        <p>
+                            **Custom news is for Non-Linked articles. Make a default selection to enter custom
+                            breaking news.</p>
+                        <br />
+                        <input id="btnsubmit-savebrknews" value="Save Breaking News" type="submit" name="command"
+                            class="btn btn-md btn-success" title="Save" />
+                    </div>
+                    <div class="tab-pane" id="Categories">
+                        <h3>
+                            Categories</h3>
+                        <table id="tblCatagories" class="tablesorter">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Category Name
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Categories != null)
+                                {
+                                    foreach (var category in Model.Categories)
+                                    { 
+                                    <tr>
+                                        <td>
+                                            @category.Name
+                                        </td>
+                                    </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        @*<button id="btnaddnewCategory" class="btn btn-success btn-large" title="Add a new Category">
+                            Add new Category</button>*@
+                    </div>
+                    }
+                }
+            </div>
+            <!-- Modal -->            
+            <div class="modal fade" id="previewEntryPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Close</button>
+                </div>
+                <div id="EntryPostbody" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Close</button>
+                </div>
+            </div>
+            <!-- /.modal -->
+        </div>
+    </div>
+    <script src="../../Scripts/js/tablesorter.js" type="text/javascript"></script>
+    <script src="../../Scripts/js/tablesorter_widget.js" type="text/javascript"></script>
+    <script src="../../Scripts/js/jquery.prettyPhoto.js" type="text/javascript"></script>
+    <script src="../../Scripts/js/bootstrap.min.js"></script>
+    <script src="../../Scripts/js/magicsuggest-1.3.1-min.js" type="text/javascript"></script>   
+    <script src="../../Scripts/js/manage.js" type="text/javascript"></script>
+     
+ 
+    
+}

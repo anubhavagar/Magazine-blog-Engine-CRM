@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="maihuaam_databaseModelStoreContainer" CdmEntityContainer="maihuaam_databaseEntities">
+    <EntitySetMapping Name="ArticleCategories">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.ArticleCategory">
+        <MappingFragment StoreEntitySet="ArticleCategory">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="name_english" ColumnName="name_english" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleEntries">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.ArticleEntry">
+        <MappingFragment StoreEntitySet="ArticleEntry">
+          <ScalarProperty Name="isRejected" ColumnName="isRejected" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="approver_id" ColumnName="approver_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="title_url" ColumnName="title_url" />
+          <ScalarProperty Name="content_full" ColumnName="content_full" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="isbreakingnews" ColumnName="isbreakingnews" />
+          <ScalarProperty Name="isfrontslider" ColumnName="isfrontslider" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="content_summary" ColumnName="content_summary" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="title_english" ColumnName="title_english" />
+          <ScalarProperty Name="title_seo" ColumnName="title_seo" />
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="video_id" ColumnName="video_id" />
+          <ScalarProperty Name="picture_id" ColumnName="picture_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Articles">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.Article">
+        <MappingFragment StoreEntitySet="Articles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BreakingNews">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.BreakingNew">
+        <MappingFragment StoreEntitySet="BreakingNews">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="article_id" ColumnName="article_id" />
+          <ScalarProperty Name="custom_text" ColumnName="custom_text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pictures">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.Picture">
+        <MappingFragment StoreEntitySet="Pictures">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="picture_url" ColumnName="picture_url" />
+          <ScalarProperty Name="article_id" ColumnName="article_id" />
+          <ScalarProperty Name="size_kb" ColumnName="size_kb" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PortalUserProfiles">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.PortalUserProfile">
+        <MappingFragment StoreEntitySet="PortalUserProfiles">
+          <ScalarProperty Name="createddate" ColumnName="createddate" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="user_email" ColumnName="user_email" />
+          <ScalarProperty Name="salt" ColumnName="salt" />
+          <ScalarProperty Name="pwdchangedate" ColumnName="pwdchangedate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.Tag">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="articles" ColumnName="articles" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.Video">
+        <MappingFragment StoreEntitySet="Videos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="video_url" ColumnName="video_url" />
+          <ScalarProperty Name="article_id" ColumnName="article_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetLatestTenNews" FunctionName="maihuaam_databaseModel.Store.GetLatestTenNews">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="maihuaam_databaseModel.LatestNewsItem">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="title_seo" ColumnName="title_seo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTopBreakingNews" FunctionName="maihuaam_databaseModel.Store.GetTopBreakingNews">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="maihuaam_databaseModel.TopBreakingNews">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="title_seo" ColumnName="title_seo" />
+          <ScalarProperty Name="RowNbr" ColumnName="RowNbr" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="ArticleArchiveds">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.ArticleArchived">
+        <MappingFragment StoreEntitySet="ArticleArchived">
+          <ScalarProperty Name="isRejected" ColumnName="isRejected" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="approver_id" ColumnName="approver_id" />
+          <ScalarProperty Name="picture_id" ColumnName="picture_id" />
+          <ScalarProperty Name="video_id" ColumnName="video_id" />
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="title_seo" ColumnName="title_seo" />
+          <ScalarProperty Name="title_english" ColumnName="title_english" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="content_summary" ColumnName="content_summary" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="isfrontslider" ColumnName="isfrontslider" />
+          <ScalarProperty Name="isbreakingnews" ColumnName="isbreakingnews" />
+          <ScalarProperty Name="Archived" ColumnName="Archived" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="content_full" ColumnName="content_full" />
+          <ScalarProperty Name="title_url" ColumnName="title_url" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticlePublisheds">
+      <EntityTypeMapping TypeName="maihuaam_databaseModel.ArticlePublished">
+        <MappingFragment StoreEntitySet="ArticlePublished">
+          <ScalarProperty Name="isRejected" ColumnName="isRejected" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="approver_id" ColumnName="approver_id" />
+          <ScalarProperty Name="picture_id" ColumnName="picture_id" />
+          <ScalarProperty Name="video_id" ColumnName="video_id" />
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="title_seo" ColumnName="title_seo" />
+          <ScalarProperty Name="title_english" ColumnName="title_english" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="content_summary" ColumnName="content_summary" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="isfrontslider" ColumnName="isfrontslider" />
+          <ScalarProperty Name="isbreakingnews" ColumnName="isbreakingnews" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="content_full" ColumnName="content_full" />
+          <ScalarProperty Name="title_url" ColumnName="title_url" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

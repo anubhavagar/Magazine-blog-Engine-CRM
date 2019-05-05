@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="rosteci_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="rosteci_ModelStoreContainer">
+    <EntitySet Name="ArticleCategory" EntityType="rosteci_Model.Store.ArticleCategory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ArticleEntry" EntityType="rosteci_Model.Store.ArticleEntry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Articles" EntityType="rosteci_Model.Store.Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BreakingNews" EntityType="rosteci_Model.Store.BreakingNews" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pictures" EntityType="rosteci_Model.Store.Pictures" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PortalUserProfiles" EntityType="rosteci_Model.Store.PortalUserProfiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products_Human" EntityType="rosteci_Model.Store.Products_Human" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products_Human_BK" EntityType="rosteci_Model.Store.Products_Human_BK" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products_Vetenary" EntityType="rosteci_Model.Store.Products_Vetenary" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tags" EntityType="rosteci_Model.Store.Tags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserProfiles" EntityType="rosteci_Model.Store.UserProfiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Videos" EntityType="rosteci_Model.Store.Videos" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ArticleEntry_ArticleCategory" Association="rosteci_Model.Store.FK_ArticleEntry_ArticleCategory">
+      <End Role="ArticleCategory" EntitySet="ArticleCategory" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_Articles" Association="rosteci_Model.Store.FK_ArticleEntry_Articles">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_PortalUserProfiles" Association="rosteci_Model.Store.FK_ArticleEntry_PortalUserProfiles">
+      <End Role="PortalUserProfiles" EntitySet="PortalUserProfiles" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ArticleCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="name_english" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ArticleEntry">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="category_id" Type="int" />
+    <Property Name="title_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="content_full" Type="nvarchar(max)" />
+    <Property Name="author" Type="nvarchar" MaxLength="50" />
+    <Property Name="active" Type="tinyint" />
+    <Property Name="picture_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="video_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="tags" Type="nvarchar" MaxLength="100" />
+    <Property Name="company" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_emailid" Type="varchar" MaxLength="50" />
+    <Property Name="published" Type="tinyint" />
+    <Property Name="isbreakingnews" Type="tinyint" />
+    <Property Name="isfrontslider" Type="tinyint" />
+    <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="content_summary" Type="nvarchar(max)" />
+    <Property Name="title" Type="nvarchar" MaxLength="300" />
+    <Property Name="title_english" Type="varchar" MaxLength="300" />
+    <Property Name="title_seo" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Articles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="created_date" Type="datetime" Nullable="false" />
+    <Property Name="modified_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BreakingNews">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="nvarchar" MaxLength="100" />
+    <Property Name="article_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Pictures">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="picture_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="article_id" Type="int" />
+  </EntityType>
+  <EntityType Name="PortalUserProfiles">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="last_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Role" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="user_email" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="salt" Type="nvarchar" MaxLength="50" />
+    <Property Name="pwdchangedate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Products_Human">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="composition" Type="varchar(max)" />
+    <Property Name="packing" Type="varchar" MaxLength="200" />
+    <Property Name="producttype" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="medicinetype" Type="nvarchar" MaxLength="50" />
+    <Property Name="imagepath" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Products_Human_BK">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="composition" Type="varchar(max)" />
+    <Property Name="packing" Type="varchar" MaxLength="200" />
+    <Property Name="producttype" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="medicinetype" Type="nvarchar" MaxLength="50" />
+    <Property Name="imagepath" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Products_Vetenary">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" MaxLength="200" />
+    <Property Name="composition" Type="varchar" MaxLength="1000" />
+    <Property Name="type" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="about" Type="nvarchar(max)" />
+    <Property Name="imagepath" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Tags">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="articles" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="UserProfiles">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="UserRole" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="salt" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Videos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="video_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="article_id" Type="int" />
+  </EntityType>
+  <Association Name="FK_ArticleEntry_ArticleCategory">
+    <End Role="ArticleCategory" Type="rosteci_Model.Store.ArticleCategory" Multiplicity="0..1" />
+    <End Role="ArticleEntry" Type="rosteci_Model.Store.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_Articles">
+    <End Role="Articles" Type="rosteci_Model.Store.Articles" Multiplicity="1" />
+    <End Role="ArticleEntry" Type="rosteci_Model.Store.ArticleEntry" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_PortalUserProfiles">
+    <End Role="PortalUserProfiles" Type="rosteci_Model.Store.PortalUserProfiles" Multiplicity="1" />
+    <End Role="ArticleEntry" Type="rosteci_Model.Store.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PortalUserProfiles">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetFrontPageDataByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="mukeshgarg" />
+</Schema>

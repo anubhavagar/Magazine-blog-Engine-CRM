@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aapkimagazineModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="aapkimagazineModelStoreContainer">
+    <EntitySet Name="ArticleCategory" EntityType="aapkimagazineModel.Store.ArticleCategory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ArticleEntry" EntityType="aapkimagazineModel.Store.ArticleEntry" store:Type="Tables" store:Schema="dbo" store:Name="ArticleEntry">
+      <DefiningQuery>SELECT 
+      [ArticleEntry].[id] AS [id], 
+      [ArticleEntry].[title] AS [title], 
+      [ArticleEntry].[category_id] AS [category_id], 
+      [ArticleEntry].[title_url] AS [title_url], 
+      [ArticleEntry].[content_full] AS [content_full], 
+      [ArticleEntry].[author] AS [author], 
+      [ArticleEntry].[active] AS [active], 
+      [ArticleEntry].[picture_url] AS [picture_url], 
+      [ArticleEntry].[video_url] AS [video_url], 
+      [ArticleEntry].[tags] AS [tags], 
+      [ArticleEntry].[company] AS [company], 
+      [ArticleEntry].[user_id] AS [user_id]
+      FROM [dbo].[ArticleEntry] AS [ArticleEntry]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Articles" EntityType="aapkimagazineModel.Store.Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PortalUserProfiles" EntityType="aapkimagazineModel.Store.PortalUserProfiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tags" EntityType="aapkimagazineModel.Store.Tags" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ArticleEntry_ArticleCategory" Association="aapkimagazineModel.Store.FK_ArticleEntry_ArticleCategory">
+      <End Role="ArticleCategory" EntitySet="ArticleCategory" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleEntry_Articles" Association="aapkimagazineModel.Store.FK_ArticleEntry_Articles">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="ArticleEntry" EntitySet="ArticleEntry" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ArticleCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'aapkimagazine.dbo.ArticleEntry' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="ArticleEntry">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="100" />
+    <Property Name="category_id" Type="int" />
+    <Property Name="title_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="content_full" Type="nvarchar(max)" />
+    <Property Name="author" Type="nvarchar" MaxLength="100" />
+    <Property Name="active" Type="tinyint" />
+    <Property Name="picture_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="video_url" Type="nvarchar" MaxLength="100" />
+    <Property Name="tags" Type="nvarchar" MaxLength="100" />
+    <Property Name="company" Type="nvarchar" MaxLength="100" />
+    <Property Name="user_id" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Articles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="created_date" Type="datetime" Nullable="false" />
+    <Property Name="modified_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PortalUserProfiles">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="last_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Role" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="user_email" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="salt" Type="nvarchar" MaxLength="50" />
+    <Property Name="pwdchangedate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Tags">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="article_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ArticleEntry_ArticleCategory">
+    <End Role="ArticleCategory" Type="aapkimagazineModel.Store.ArticleCategory" Multiplicity="0..1" />
+    <End Role="ArticleEntry" Type="aapkimagazineModel.Store.ArticleEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleEntry_Articles">
+    <End Role="Articles" Type="aapkimagazineModel.Store.Articles" Multiplicity="1" />
+    <End Role="ArticleEntry" Type="aapkimagazineModel.Store.ArticleEntry" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArticleEntry">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

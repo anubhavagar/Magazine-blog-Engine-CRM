@@ -1,0 +1,41 @@
+﻿@model AapkiMagazine.Models.BreakingNews
+<div class="content section row">
+<div class="bg-base col-md-12 col-lg-12">
+    <div class="break_news">
+        <span class="break_news_text">समाचार: <b class=""></b></span>
+        <div style="display: none;" id="brknewstickerdiv">
+            @if (Model.BreakingNewsItems != null)
+            {
+                if (Model.BreakingNewsItems.Count > 0)
+                {
+                <ul id="brknewsticker" class="brknewsticker">
+                    @foreach (var item in Model.BreakingNewsItems)
+                    {
+                        if (item.Article_id == null)
+                        {
+
+                            if (string.IsNullOrEmpty(item.CustomText))
+                            {
+
+                            }
+                            else
+                            {
+                        <li><a href="#"><strong>@item.CustomText</strong></a></li>
+                            }
+                        }
+                        else
+                        {
+                            if (item.Article_id > 0)
+                            {
+                        <li><a href="@Url.Action("Index", "Post", new { articleId = @item.Article_id, articleTitle = @item.Title_SEO })">
+                            <strong>@item.Title</strong></a> </li> 
+                            }
+
+                        }
+                    }
+                </ul>
+                }
+            }
+        </div>
+    </div></div>
+</div>

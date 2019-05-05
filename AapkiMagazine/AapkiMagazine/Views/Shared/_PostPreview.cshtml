@@ -1,0 +1,122 @@
+﻿@model AapkiMagazine.Models.PostViewModel
+@using AapkiMagazine.Models;
+<div class="container">
+    <div id="content" class="content section row">
+        @if (Model != null)
+        {
+            if (Model.ArticleItem != null)
+            {      
+      
+            <div class="col-md-8 bg-base col-lg-8 col-xl-9">
+                <header class="page-header">
+						<h2 class="" style=" text-align:center;">
+							@Model.ArticleItem.Title
+						</h2>
+
+					</header>
+                <article class="entry style-single type-post">
+						<div class="entry-meta indented">
+                         @if (Model.ArticleItem.Author != null)
+                         { 
+							<span class="author">by <a href="#">@Model.ArticleItem.Author</a></span>
+                         }
+                            				 @if (Model.ArticleItem.Created_Date != null)
+                                 { 
+                                 <span class="entry-date"><a href="#">on <time datetime="@Model.ArticleItem.Created_Date">@Model.ArticleItem.Created_Date.ToString("dd MMM yyyy")</time></a></span>
+                                 
+                                 }
+							
+							 @if (Model.ArticleItem.Company != null)
+        {<span class="category"> - <a href="#">
+                            @Model.ArticleItem.Company</a></span> }
+                            
+						</div>
+						<div class="entry-content indented">
+                       <article id = "post-content">
+                       
+                         @if (Model.ArticleItem.Content != null)
+                         {
+                                @Html.Raw(Model.ArticleItem.Content)
+                           
+                         }		</article>		
+						</div>
+
+					</article>
+            </div>
+            <!--/.col-md-8.col-lg-8.col-xl-9-->
+            <div class="sidebar col-md-4 col-lg-4 col-xl-3">
+                @if (!string.IsNullOrEmpty(Model.ArticleItem.Image_path))
+                { 
+                    <aside class="widget">
+
+						<h3 class="widget-title ribbon"><span>तस्वीर</span></h3>
+
+						<figure class="">
+
+							<!-- to disable lazy loading, remove data-src and data-src-retina -->
+							<img src="@Model.ArticleItem.Image_path" alt="@Model.ArticleItem.Title" class="media-object" data-src="@Model.ArticleItem.Image_path" data-src-retina="@Model.ArticleItem.Image_path" width="400" height="300" alt="" />
+
+							<!--fallback for no javascript browsers-->
+							<noscript>								
+                                &lt;img src="@Model.ArticleItem.Image_path" alt=""&gt;
+							</noscript>
+
+						</figure>
+
+					</aside>
+                    <!--/.widget-->
+                }
+                @if (!string.IsNullOrEmpty(Model.ArticleItem.Video_url))
+                { 
+                    <aside class="widget">
+
+						<h3 class="widget-title ribbon"><span>वीडियो</span></h3>
+
+						<header class="entry-header aligncenter">
+									<p class="small"><a href="#">वीडियो</a></p>
+									<h3 class="entry-title"><a href="@Model.ArticleItem.Video_url" rel="prettyPhoto">@Model.ArticleItem.Title</a> </h3>
+									<div class="entry-meta">
+										<span class="entry-date"><a href="#"><time datetime="@Model.ArticleItem.Created_Date">@Model.ArticleItem.Created_Date.ToString("dd MMM yyyy") </time></a></span>
+										<span class="entry-author"> by <a href="#">@Model.ArticleItem.Company</a></span>
+									</div>
+								</header>
+
+					</aside>
+                    <!--/.widget-->
+                }
+                <aside class="widget">
+
+						<h3 class="widget-title ribbon "><span>टेग्स</span></h3>
+        @if (Model.ArticleItem.Tags != null)
+        {
+           
+                        <div class="tagcloud">
+             @foreach (var tag in Model.ArticleItem.Tags)
+             { 
+                 <a class="btn btn-default btn-xs">@tag.name</a>                          
+             }</div>
+        }
+        else
+        { <p>No Tags for this post</p> }</aside>
+                <!--/.widget-->
+            </div>
+            }
+            else
+            {
+            <div>
+                <p>
+                    Article Not found</p>
+            </div>
+      
+            }
+        }
+        else
+        {
+            <div>
+                <p>
+                    Article Not found</p>
+            </div>
+      
+        }
+    </div>
+</div>

@@ -1,0 +1,163 @@
+﻿@using AapkiMagazine.Models;
+@model AapkiMagazine.Models.TagViewModel
+@{    
+    if (Model.Tag != null) { ViewBag.Title = Model.Tag.name + " | मैं हूँ आम आदमी"; }
+    else
+    {
+        ViewBag.Title = "Page Not Found | मैं हूँ आम आदमी";
+    }
+
+    ViewBag.Keywords = string.Empty;
+    if (Model.Tag != null)
+    {
+        if (!string.IsNullOrEmpty(Model.Tag.name))
+        {
+            ViewBag.Keywords = "Main Hun Aam Aadmi, Tags" + ", " + Model.Tag.name;
+        }
+    }
+
+    ViewBag.Description = "Tags - Main Hun Aam Aadmi  ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="content" class="content section row">
+    @if (Model.Articles != null)
+    {
+        if (Model.Articles.Count > 0)
+        {
+        <div class="col-md-8 bg-base col-lg-8 col-xl-9">
+            <div class="ribbon ribbon-highlight">
+                <ol class="breadcrumb ribbon-inner">
+                    <li><a href="#" onclick="location.href='@Url.Action("Index", "Home")'">मैं हूँ आम आदमी</a></li><li>
+                        टेग्स</li>
+                    @if (!string.IsNullOrEmpty(Model.Tag.name))
+                    { 
+                        <li>
+                            @Html.ActionLink(Model.Tag.name, "Index", "Tag", new { @tagged = Model.Tag.name.ToLower() }, new { @title = Model.Tag.name })
+                        </li>
+                    }
+                </ol>
+            </div>
+            <div class="entries">
+                @foreach (var article in Model.Articles)
+                { 
+                    <article class="entry style-media media type-post">
+                     @if (!string.IsNullOrEmpty(article.Image_path))
+                     {
+							<figure class="media-object pull-left entry-thumbnail hidden-xs">
+
+								 <a href="@article.Image_path" title="@article.Title" class="thumbnail" data-rel="prettyPhoto">
+                                                <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                <img src="@article.Image_path" data-src="@article.Image_path" data-src-retina="@article.Image_path"
+                                                        width="230" height="230" alt="@article.Title" />
+                                                <!--fallback for no javascript browsers-->
+                                                <noscript>
+                                                    <img src="@article.Image_path" alt="@article.Title" width="230" height="230">
+                                                </noscript>
+                                            </a>
+
+							</figure>
+                     }
+							<div class="media-body">
+
+								<header class="entry-header">
+									<h3 class="entry-title">
+										
+                                        @Html.ActionLink(article.Title, "Index", "Post", new { articleId = article.ID, articleTitle = article.Title_SEO }, new { title = article.Title, rel = "bookmark" })                                  
+									</h3>
+
+									<div class="entry-meta">
+                                     @if (article.Author != null)
+                                     { 
+                                         <span class="author">by <a href="#">@article.Author</a></span>                                     
+                                     }
+										
+                                        @if (article.Created_Date != null)
+                                        { 
+                                 <span class="entry-date"><a href="#">on <time datetime="@article.Created_Date">@article.Created_Date.ToString("dd MMM yyyy")</time></a></span>
+                                 
+                                        }
+										 @if (article.Company != null)
+           {
+               <span class="category"> - <a href="#">
+                            @article.Company</a></span> }
+									</div>
+								</header>
+
+								<p>
+									 @if (article.Content_summary != null)
+          {
+                                @Html.Raw(article.Content_summary)
+                           
+          }	
+									<br />
+                                     @Html.ActionLink("और पढें..", "Index", "Post", new { articleId = article.ID, articleTitle = article.Title_SEO }, new { title = article.Title, Class = "btn btn-default btn-xs" })                                  
+								</p>
+
+							</div>
+
+						</article>
+                    <hr class="line-seperator" />
+                         
+                }
+            </div>
+        </div> 
+        <!--/.col-md-8.col-lg-8.col-xl-9-->
+          <div id = "taaja_kahabar" class="sidebar col-md-4 col-lg-4 col-xl-3">
+            <aside class="widget">
+						<h3 class="widget-title ribbon"><span>ताज़ा खबरें</span></h3>
+                        
+                         @if (Model.TopNews != null)
+                         {
+                             foreach (var article in Model.TopNews)
+                             {                          
+                             
+                              <article class="type-post style-media-list style-review-list media col-sm-6 col-md-12">
+								                                
+                                 @if (!string.IsNullOrEmpty(article.Image_Path))
+                                 {
+                                                <!-- to disable lazy loading, remove data-src and data-src-retina -->
+                                                <img src="@article.Image_Path" data-src="@article.Image_Path" data-src-retina="@article.Image_Path"
+                                                        width="80" height="80" alt="@article.Title" class="media-object pull-left"/>
+                                                <!--fallback for no javascript browsers-->
+                                                <noscript>
+                                                    <img src="@article.Image_Path" alt="@article.Title" width="80" height="80">
+                                                </noscript>
+                                          
+								
+								<noscript>
+									&lt;img src="@article.Image_Path" alt=""&gt;
+								</noscript>
+                                 
+                                 }
+
+								<div class="media-body">
+									<h3 class="entry-title">
+										@Html.ActionLink(article.Title, "Index", "Post", new { articleId = article.Article_id, articleTitle = article.Title_SEO }, new { title = article.Title, rel = "bookmark" }) 
+									</h3>
+									<p class="small"></p>
+								</div>
+
+							</article>
+                             
+                             }
+
+                         }
+
+					</aside>
+
+
+        </div>
+        }
+        else
+        {
+            Model.PageNotFound = new PageNotFound{ Error = "No Post Found", Message = "We couldn't find any post(s) for requested tag entry."};           
+            @Html.Partial("_PageNotFound", Model.PageNotFound)
+        }
+    }
+    else
+    {
+        Model.PageNotFound = new PageNotFound { Error = "No Post Found", Message = "We couldn't find any post(s) for requested tag entry." };   
+        @Html.Partial("_PageNotFound", Model.PageNotFound)
+ 
+    }
+</div>
